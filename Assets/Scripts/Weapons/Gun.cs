@@ -18,9 +18,8 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = bulletPool.GetBullet();  
-        bullet.transform.position = firePoint.position;
-        bullet.transform.rotation = firePoint.rotation;
+        Bullet bullet = bulletPool.GetBullet();  
+        bullet.Shoot(firePoint.position);
     }
 }
 

@@ -19,13 +19,13 @@ public class BulletPool : MonoBehaviour
     }
 
     // Obtener una bala del pool
-    public GameObject GetBullet()
+    public Bullet GetBullet()
     {
         if (bulletPool.Count > 0)
         {
             Bullet bullet = bulletPool.Dequeue();
             bullet.gameObject.SetActive(true);  // Activar la bala
-            return bullet.gameObject;
+            return bullet;
         }
         else
         {
@@ -35,9 +35,10 @@ public class BulletPool : MonoBehaviour
             {
                 bulletPool.Enqueue(bullet);
                 bullet.Initialize(this);
+                return bullet;
             }
-            return bulletGO;
         }
+        return null;
     }
 
     // Devolver una bala al pool
