@@ -1,51 +1,50 @@
 using UnityEngine;
+using System.Collections;  // Necesario para IEnumerator
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float timeDestroy = 4;  // Tiempo antes de que la bala se "destruya" (vuelva al pool)
-    public float bulletSpeed = 20f;  // Velocidad de la bala
+    [SerializeField] private float timeDestroy = 4f;
+    [SerializeField] private float bulletSpeed = 20f;
+    
     private Rigidbody rb;
-    private BulletPool bulletPool;  // Referencia al pool de balas
-    private bool isActive = false;  // Indica si la bala está activa
+    private BulletPool bulletPool;
+    private bool isActive = false;
 
-    // Método para inicializar la bala con el pool al que pertenece
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();  // Mejor en Awake que en Start
+    }
+
     public void Initialize(BulletPool pool)
     {
-        bulletPool = pool;  
+        bulletPool = pool;
     }
 
-    // Método para disparar la bala
     public void Shoot(Vector3 newPosition, Quaternion newRotation)
     {
-        transform.position = newPosition;  // Coloca la bala en la posición del disparo
-        transform.rotation = newRotation;  // Ajusta la dirección de la bala según la rotación del arma
-        isActive = true;  // Marca la bala como activa
-        Invoke(nameof(ReturnBullet), timeDestroy);  // Programa la devolución de la bala al pool después de un tiempo
+        transform.position = newPosition;
+        transform.rotation = newRotation;
+        isActive = true;
+        rb.linearVelocity = transform.forward * bulletSpeed; // Se aplica velocidad inmediatamente
+        StartCoroutine(ReturnBulletAfterTime());
     }
 
-
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        rb = GetComponent<Rigidbody>();  // Obtiene la referencia al Rigidbody
+        ReturnBullet();
     }
 
-    private void FixedUpdate()
+    private IEnumerator ReturnBulletAfterTime()
     {
-        if (isActive)
-        {
-            rb.linearVelocity = transform.forward * bulletSpeed;  // Aplica velocidad hacia adelante
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        // Cuando la bala choca con algo, se devuelve al pool
+        yield return new WaitForSeconds(timeDestroy);
         ReturnBullet();
     }
 
     private void ReturnBullet()
     {
-        bulletPool.ReturnBullet(this);  // Llama al método de retorno en el pool
-        isActive = false;  // Marca la bala como inactiva
+        if (!isActive) return;
+        isActive = false;
+        rb.linearVelocity = Vector3.zero;  // Resetear velocidad antes de devolver al pool
+        bulletPool.ReturnBullet(this);
     }
 }
