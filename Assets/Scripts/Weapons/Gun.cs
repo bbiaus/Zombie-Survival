@@ -1,29 +1,40 @@
 using UnityEngine;
+using UnityEngine.InputSystem; // Nuevo sistema de entrada
 
 public class Gun : MonoBehaviour
 {
-    public Transform firePoint;  // Punto desde donde se disparan las balas
-    public BulletPool bulletPool;  // Referencia al pool de balas
-    public float fireRate = 0.2f;  // Tiempo entre disparos
-    private float nextFireTime = 0f;  // Tiempo para el próximo disparo permitido
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private float fireRate = 0.2f;
+    [SerializeField] private Camera playerCamera;  // Cámara en primera persona
 
-    void Update()
+    private float nextFireTime = 0f;
+
+    private void Update()
     {
-        // Si el jugador mantiene presionado el botón de disparo y ya pasó el tiempo del fireRate
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime) // Nuevo sistema de entrada
         {
-            nextFireTime = Time.time + fireRate;  // Calcula el próximo disparo permitido
+            nextFireTime = Time.time + fireRate;
             Shoot();
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
-        Bullet bullet = bulletPool.GetBullet();  
-        if (bullet != null)  // Evita errores si el pool está vacío
-        {
-            bullet.Shoot(firePoint.position, firePoint.rotation);  // Dispara la bala
-        }
+        Bullet bullet = bulletPool.GetBullet();
+        if (bullet == null) return; // No dispares si no hay balas
+
+        Vector3 shootDirection = GetShootDirection(); // Obtiene la dirección desde la cámara
+        bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection)); // Dispara hacia allí
     }
 
+    private Vector3 GetShootDirection()
+    {
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Disparo desde el centro de la pantalla
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))  // 100 unidades de distancia
+        {
+            return (hit.point - firePoint.position).normalized; // La bala va hacia el punto donde impacta el raycast
+        }
+        return playerCamera.transform.forward; // Si no hay impacto, dispara recto
+    }
 }
