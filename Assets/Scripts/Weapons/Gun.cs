@@ -7,6 +7,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private BulletPool bulletPool;
     [SerializeField] private float fireRate = 0.2f;
     [SerializeField] private Camera playerCamera;  // Cámara en primera persona
+    [SerializeField] private AudioSource gunAudioSource;  // Sonido del arma
+    [SerializeField] private AudioClip gunShotSound;  // Archivo de sonido
 
     private float nextFireTime = 0f;
 
@@ -19,6 +21,8 @@ public class Gun : MonoBehaviour
         }
     }
 
+    
+
     private void Shoot()
     {
         Bullet bullet = bulletPool.GetBullet();
@@ -26,6 +30,9 @@ public class Gun : MonoBehaviour
 
         Vector3 shootDirection = GetShootDirection(); // Obtiene la dirección desde la cámara
         bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection)); // Dispara hacia allí
+
+        // 🔊 Reproducir sonido de disparo
+        gunAudioSource.PlayOneShot(gunShotSound, 0.1f); // Volumen al 10% para que no sea tan molesto
     }
 
     private Vector3 GetShootDirection()
