@@ -4,7 +4,8 @@ using System.Collections;  // Necesario para IEnumerator
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float timeDestroy = 4f;
-    [SerializeField] private float bulletSpeed = 20f;
+    [SerializeField] private float bulletSpeed = 100f; // Velocidad de las balas
+
     
     private Rigidbody rb;
     private BulletPool bulletPool;

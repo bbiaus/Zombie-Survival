@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem; // Nuevo sistema de entrada
 
@@ -9,8 +10,19 @@ public class Gun : MonoBehaviour
     [SerializeField] private Camera playerCamera;  // Cámara en primera persona
     [SerializeField] private AudioSource gunAudioSource;  // Sonido del arma
     [SerializeField] private AudioClip gunShotSound;  // Archivo de sonido
+    [SerializeField] private ParticleSystem muzzleFlash;  // Efecto de particulas al disparar
+    [SerializeField] private Transform gunTransform; // Referencia al objeto del arma
+    [SerializeField] private float recoilAmount = 0.1f; // Distancia del retroceso hacia atrás
+    [SerializeField] private float recoilSpeed = 5f; // Velocidad con la que vuelve a su posición original
+
+    private Vector3 originalPosition; // posición inicial del arma
 
     private float nextFireTime = 0f;
+
+    private void Start()
+    {
+        originalPosition = gunTransform.localPosition; // Guarda la posición inicial del arma
+    }
 
     private void Update()
     {
@@ -21,19 +33,48 @@ public class Gun : MonoBehaviour
         }
     }
 
-    
-
-    private void Shoot()
+    private IEnumerator RecoilEffect()
     {
-        Bullet bullet = bulletPool.GetBullet();
-        if (bullet == null) return; // No dispares si no hay balas
+        // Mueve el arma hacia atrás simulando el retroceso
+        Vector3 recoilPosition = originalPosition - new Vector3(0, 0, recoilAmount);
+        gunTransform.localPosition = recoilPosition;
 
-        Vector3 shootDirection = GetShootDirection(); // Obtiene la dirección desde la cámara
-        bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection)); // Dispara hacia allí
+        // Espera un pequeño tiempo antes de comenzar a volver a la posición original
+        yield return new WaitForSeconds(0.05f);
 
-        // 🔊 Reproducir sonido de disparo
-        gunAudioSource.PlayOneShot(gunShotSound, 0.1f); // Volumen al 10% para que no sea tan molesto
+        // Suavemente regresa el arma a su posición original
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.1f)
+        {
+            gunTransform.localPosition = Vector3.Lerp(recoilPosition, originalPosition, elapsedTime * recoilSpeed);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        gunTransform.localPosition = originalPosition;
     }
+
+
+private void Shoot()
+{
+    Bullet bullet = bulletPool.GetBullet();
+    if (bullet == null) return;
+
+    Vector3 shootDirection = GetShootDirection();
+    bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection));
+
+    // Activa el efecto de disparo
+    muzzleFlash.Play();
+
+    // Reproduce el sonido de disparo
+    gunAudioSource.PlayOneShot(gunShotSound, 0.7f);
+
+    // Aplica retroceso del arma
+    StartCoroutine(RecoilEffect());
+
+    // Expulsa casquillo
+    //EjectCasing();
+}
+
 
     private Vector3 GetShootDirection()
     {
