@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float recoilSpeed = 5f; // Velocidad con la que vuelve a su posición original
     [SerializeField] private GameObject bulletCasingPrefab; // Prefab del casquillo
     [SerializeField] private Transform casingEjectPoint; // Punto donde se expulsan los casquillos
+    [SerializeField] private CasingPool casingPool;  // Referencia al pool de casquillos
 
 
     private Vector3 originalPosition; // posición inicial del arma
@@ -89,46 +90,23 @@ private void Shoot()
         return playerCamera.transform.forward; // Si no hay impacto, dispara recto
     }
 
-    public void EjectCasing()
-    {
-        GameObject casingInstance = Instantiate(bulletCasingPrefab, casingEjectPoint.position, casingEjectPoint.rotation);
-        Rigidbody casingRb = casingInstance.GetComponent<Rigidbody>();
-
-        // Calcula la dirección de expulsión con más variación
-        Vector3 ejectDirection = casingEjectPoint.right + (Vector3.up * Random.Range(0.2f, 0.8f));
-
-        // Aplica una fuerza realista
-        casingRb.AddForce(ejectDirection * Random.Range(1.5f, 2.5f), ForceMode.Impulse);
-
-        // Aplica torque para que rote de forma variada
-        casingRb.AddTorque(Random.insideUnitSphere * Random.Range(0.2f, 0.8f), ForceMode.Impulse);
-
-        // Destruye el casquillo después de 5 segundos
-        Destroy(casingInstance, 5f);
-    }
-
-    public void EjectCasingg()
-{
-    GameObject casingInstance = Instantiate(bulletCasingPrefab, casingEjectPoint.position, casingEjectPoint.rotation);
-    Rigidbody casingRb = casingInstance.GetComponent<Rigidbody>();
-
-    // Dirección base (hacia donde apunta el casingEjectPoint)
-    Vector3 ejectDirection = casingEjectPoint.forward;
-
-    // Añade un pequeño rango de variación aleatoria en todas las direcciones
-    ejectDirection += Random.insideUnitSphere * 0.2f;
-
-    // Normaliza para mantener una dirección consistente y aplica fuerza
-    ejectDirection.Normalize();
-    casingRb.AddForce(ejectDirection * 2f, ForceMode.Impulse);
-
     
 
-    // Destruye el casquillo después de 5 segundos
-    Destroy(casingInstance, 5f);
+public void EjectCasing()
+{
+    GameObject casingInstance = casingPool.GetCasing(casingEjectPoint.position, casingEjectPoint.rotation);
+    Rigidbody casingRb = casingInstance.GetComponent<Rigidbody>();
+
+    // Calcula la dirección de expulsión con variación
+    Vector3 ejectDirection = casingEjectPoint.right + (Vector3.up * Random.Range(0.2f, 0.8f));
+    casingRb.linearVelocity = Vector3.zero;  // Resetea la velocidad antes de aplicar fuerza
+    casingRb.angularVelocity = Vector3.zero; // Resetea la rotación para evitar giros locos
+
+    // Aplica una fuerza realista
+    casingRb.AddForce(ejectDirection * Random.Range(1.5f, 2.5f), ForceMode.Impulse);
+
+    // Aplica torque para que rote de forma variada
+    casingRb.AddTorque(Random.insideUnitSphere * Random.Range(0.2f, 0.8f), ForceMode.Impulse);
 }
-
-
-
 
 }
