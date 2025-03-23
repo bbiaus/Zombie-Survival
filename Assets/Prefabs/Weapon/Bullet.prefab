@@ -150,4 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeDestroy: 4
-  bulletSpeed: 25
+  bulletSpeed: 100
