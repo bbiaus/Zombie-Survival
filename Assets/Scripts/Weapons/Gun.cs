@@ -69,7 +69,7 @@ private void Shoot()
     muzzleFlash.Play();
 
     // Reproduce el sonido de disparo
-    gunAudioSource.PlayOneShot(gunShotSound, 0.7f);
+    gunAudioSource.PlayOneShot(gunShotSound, 0.1f); //sonido en 0.1 para que no moleste mucho
 
     // Aplica retroceso del arma
     StartCoroutine(RecoilEffect());
