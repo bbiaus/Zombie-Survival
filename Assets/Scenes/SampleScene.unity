@@ -421,6 +421,16 @@ MonoBehaviour:
   firePoint: {fileID: 1069498006}
   bulletPool: {fileID: 181655721}
   fireRate: 0.2
+  playerCamera: {fileID: 0}
+  gunAudioSource: {fileID: 0}
+  gunShotSound: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  gunTransform: {fileID: 0}
+  recoilAmount: 0.1
+  recoilSpeed: 5
+  bulletCasingPrefab: {fileID: 0}
+  casingEjectPoint: {fileID: 0}
+  casingPool: {fileID: 0}
 --- !u!1001 &1408221876
 PrefabInstance:
   m_ObjectHideFlags: 0
