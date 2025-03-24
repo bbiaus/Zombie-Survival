@@ -815,6 +815,30 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 6422907822885186230}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: normalPosition.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: normalPosition.y
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: normalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: sprintPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: sprintPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589292071206535919, guid: de421ec56f3f29242bf6cebf6067327e, type: 3}
+      propertyPath: sprintPosition.z
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1928,6 +1952,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 278698250}
   - {fileID: 1787571205}
+  - {fileID: 1414291496}
   - {fileID: 408832986}
   - {fileID: 6716509552662760761}
-  - {fileID: 1414291496}

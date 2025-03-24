@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem; // Nuevo sistema de entrada
+using StarterAssets;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 
 public class Gun : MonoBehaviour
 {
@@ -17,8 +20,14 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject bulletCasingPrefab; // Prefab del casquillo
     [SerializeField] private Transform casingEjectPoint; // Punto donde se expulsan los casquillos
     [SerializeField] private CasingPool casingPool;  // Referencia al pool de casquillos
+    [SerializeField] private Vector3 normalPosition = new Vector3(0.33f, -0.33f, 1f); // Posición normal
+    [SerializeField] private Quaternion normalRotation = Quaternion.Euler(0f, -1.79f, 0f);
+    [SerializeField] private Vector3 sprintPosition = new Vector3(0.3f, -0.25f, 0.3f); // Posición al correr
+    [SerializeField] private Quaternion sprintRotation = Quaternion.Euler(10f, -30f, 0f);
+    [SerializeField] private float transitionSpeed = 10f; // Velocidad de interpolación
 
 
+    private StarterAssetsInputs input; // Referencia al script de inputs
     private Vector3 originalPosition; // posición inicial del arma
 
     private float nextFireTime = 0f;
@@ -26,6 +35,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         originalPosition = gunTransform.localPosition; // Guarda la posición inicial del arma
+        input = FindAnyObjectByType<StarterAssetsInputs>(); // Busca el script de input en la escena
     }
 
     private void Update()
@@ -35,6 +45,15 @@ public class Gun : MonoBehaviour
             nextFireTime = Time.time + fireRate;
             Shoot();
         }
+
+        bool isSprinting = input.sprint;
+
+        Vector3 targetPosition = isSprinting ? sprintPosition : normalPosition;
+        Quaternion targetRotation = isSprinting ? sprintRotation : normalRotation;
+
+        // Interpola suavemente entre la posición actual y la posición objetivo
+        gunTransform.localPosition = Vector3.Lerp(gunTransform.localPosition, targetPosition, Time.deltaTime * transitionSpeed);
+        gunTransform.localRotation = Quaternion.Slerp(gunTransform.localRotation, targetRotation, Time.deltaTime * transitionSpeed);
     }
 
     private IEnumerator RecoilEffect()
@@ -58,26 +77,26 @@ public class Gun : MonoBehaviour
     }
 
 
-private void Shoot()
-{
-    Bullet bullet = bulletPool.GetBullet();
-    if (bullet == null) return;
+    private void Shoot()
+    {
+        Bullet bullet = bulletPool.GetBullet();
+        if (bullet == null) return;
 
-    Vector3 shootDirection = GetShootDirection();
-    bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection));
+        Vector3 shootDirection = GetShootDirection();
+        bullet.Shoot(firePoint.position, Quaternion.LookRotation(shootDirection));
 
-    // Activa el efecto de disparo
-    muzzleFlash.Play();
+        // Activa el efecto de disparo
+        muzzleFlash.Play();
 
-    // Reproduce el sonido de disparo
-    gunAudioSource.PlayOneShot(gunShotSound, 0.1f); //sonido en 0.1 para que no moleste mucho
+        // Reproduce el sonido de disparo
+        gunAudioSource.PlayOneShot(gunShotSound, 0.1f); //sonido en 0.1 para que no moleste mucho
 
-    // Aplica retroceso del arma
-    StartCoroutine(RecoilEffect());
+        // Aplica retroceso del arma
+        StartCoroutine(RecoilEffect());
 
-    // Expulsa casquillo
-    EjectCasing();
-}
+        // Expulsa casquillo
+        EjectCasing();
+    }
 
 
     private Vector3 GetShootDirection()
@@ -90,23 +109,23 @@ private void Shoot()
         return playerCamera.transform.forward; // Si no hay impacto, dispara recto
     }
 
-    
 
-public void EjectCasing()
-{
-    GameObject casingInstance = casingPool.GetCasing(casingEjectPoint.position, casingEjectPoint.rotation);
-    Rigidbody casingRb = casingInstance.GetComponent<Rigidbody>();
 
-    // Calcula la dirección de expulsión con variación
-    Vector3 ejectDirection = casingEjectPoint.right + (Vector3.up * Random.Range(0.2f, 0.8f));
-    casingRb.linearVelocity = Vector3.zero;  // Resetea la velocidad antes de aplicar fuerza
-    casingRb.angularVelocity = Vector3.zero; // Resetea la rotación para evitar giros locos
+    public void EjectCasing()
+    {
+        GameObject casingInstance = casingPool.GetCasing(casingEjectPoint.position, casingEjectPoint.rotation);
+        Rigidbody casingRb = casingInstance.GetComponent<Rigidbody>();
 
-    // Aplica una fuerza realista
-    casingRb.AddForce(ejectDirection * Random.Range(1.5f, 2.5f), ForceMode.Impulse);
+        // Calcula la dirección de expulsión con variación
+        Vector3 ejectDirection = casingEjectPoint.right + (Vector3.up * Random.Range(0.2f, 0.8f));
+        casingRb.linearVelocity = Vector3.zero;  // Resetea la velocidad antes de aplicar fuerza
+        casingRb.angularVelocity = Vector3.zero; // Resetea la rotación para evitar giros locos
 
-    // Aplica torque para que rote de forma variada
-    casingRb.AddTorque(Random.insideUnitSphere * Random.Range(0.2f, 0.8f), ForceMode.Impulse);
-}
+        // Aplica una fuerza realista
+        casingRb.AddForce(ejectDirection * Random.Range(1.5f, 2.5f), ForceMode.Impulse);
+
+        // Aplica torque para que rote de forma variada
+        casingRb.AddTorque(Random.insideUnitSphere * Random.Range(0.2f, 0.8f), ForceMode.Impulse);
+    }
 
 }
