@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013360cf39b85546a565a70a82de9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  casingPrefab: {fileID: 9177204692731446050, guid: 00051949801991a4290512125f0d2416, type: 3}
+  casingPrefab: {fileID: 2264818453776560218, guid: 35cf283a0191e274abec1707304d9b00, type: 3}
   poolSize: 20
 --- !u!1001 &699765457760440873
 PrefabInstance:
@@ -192,6 +192,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.079
       objectReference: {fileID: 0}
+    - target: {fileID: 3055977798567860673, guid: 54ebc2a814d4ca54495d8a79d41765b5, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 7416391047561856807}
+    - target: {fileID: 3055977798567860673, guid: 54ebc2a814d4ca54495d8a79d41765b5, type: 3}
+      propertyPath: casingPool
+      value: 
+      objectReference: {fileID: 4091233217884017616}
     - target: {fileID: 3055977798567860673, guid: 54ebc2a814d4ca54495d8a79d41765b5, type: 3}
       propertyPath: playerCamera
       value: 
