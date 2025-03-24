@@ -17,6 +17,8 @@ namespace StarterAssets
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 6.0f;
 		[Tooltip("Rotation speed of the character")]
+		public float stepRate = 0.5f; // Tiempo entre pasos
+		private float nextStep = 0f;
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
@@ -37,6 +39,7 @@ namespace StarterAssets
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
 		public bool Grounded = true;
 		[Tooltip("Useful for rough ground")]
+		private bool wasGrounded = true; // para chequear si el sonido tiene que ser de caida o salto
 		public float GroundedOffset = -0.14f;
 		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
 		public float GroundedRadius = 0.5f;
@@ -59,12 +62,19 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
+		public AudioSource footstepAudio;
+		public AudioClip[] footstepWalkSounds;
+		public AudioClip[] footstepSprintSounds;
+		public CharacterController controller;
+		public AudioSource jumpAudio;
+		public AudioClip jumpSound;
+		public AudioClip landSound;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
 #endif
@@ -78,11 +88,11 @@ namespace StarterAssets
 		{
 			get
 			{
-				#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
 				return _playerInput.currentControlScheme == "KeyboardMouse";
-				#else
+#else
 				return false;
-				#endif
+#endif
 			}
 		}
 
@@ -136,7 +146,7 @@ namespace StarterAssets
 			{
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
+
 				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
@@ -196,14 +206,74 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+			if (controller.isGrounded && controller.velocity.magnitude >= MoveSpeed && controller.velocity.magnitude < SprintSpeed)
+			{
+				if (Time.time > nextStep)
+				{
+					nextStep = Time.time + stepRate;
+					PlayFootstepWalk();
+				}
+			}
+			else if (controller.isGrounded && controller.velocity.magnitude >= SprintSpeed)
+			{
+				if (Time.time > nextStep)
+				{
+					nextStep = Time.time + stepRate / 1.5f;
+					PlayFootstepSprint();
+				}
+			}
 		}
 
 		private void JumpAndGravity()
 		{
 			if (Grounded)
 			{
+				if (!wasGrounded) // Detectamos que acaba de aterrizar
+				{
+					_fallTimeoutDelta = FallTimeout; // Resetear tiempo de caída
+
+					jumpAudio.clip = landSound; // Reproducir sonido de aterrizaje
+					jumpAudio.Play();
+
+					if (_verticalVelocity < 0.0f)
+					{
+						_verticalVelocity = -2f; // Evitar que el personaje se hunda en el suelo
+					}
+
+					_input.jump = false; // 🔹 RESETEAR EL INPUT DE SALTO AL TOCAR EL SUELO
+				}
+
+				if (_input.jump && _jumpTimeoutDelta <= 0.0f) // Si presiona el botón de salto
+				{
+					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // Calcular fuerza de salto
+
+					jumpAudio.clip = jumpSound; // Reproducir sonido de salto
+					jumpAudio.Play();
+
+					_jumpTimeoutDelta = JumpTimeout; // Resetear el tiempo de espera para otro salto
+				}
+			}
+			else
+			{
+				_fallTimeoutDelta -= Time.deltaTime; // Contar tiempo en caída
+			}
+
+			_jumpTimeoutDelta -= Time.deltaTime; // Reducir tiempo de espera del salto
+			_verticalVelocity += Gravity * Time.deltaTime; // Aplicar gravedad
+
+			wasGrounded = Grounded; // Actualizar estado del suelo
+		}
+
+		/*private void JumpAndGravity()
+		{
+			if (Grounded && !wasGrounded)
+			{
 				// reset the fall timeout timer
 				_fallTimeoutDelta = FallTimeout;
+
+				jumpAudio.clip = landSound;
+				jumpAudio.Play();
 
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
@@ -226,6 +296,9 @@ namespace StarterAssets
 			}
 			else
 			{
+				jumpAudio.clip = jumpSound;
+				jumpAudio.Play();
+				
 				// reset the jump timeout timer
 				_jumpTimeoutDelta = JumpTimeout;
 
@@ -244,7 +317,8 @@ namespace StarterAssets
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
-		}
+			wasGrounded = Grounded;
+		}*/
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{
@@ -263,6 +337,23 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+		void PlayFootstepWalk()
+		{
+			if (footstepWalkSounds.Length > 0)
+			{
+				footstepAudio.clip = footstepWalkSounds[Random.Range(0, footstepWalkSounds.Length)];
+				footstepAudio.Play();
+			}
+		}
+
+		void PlayFootstepSprint()
+		{
+			if (footstepSprintSounds.Length > 0)
+			{
+				footstepAudio.clip = footstepSprintSounds[Random.Range(0, footstepSprintSounds.Length)];
+				footstepAudio.Play();
+			}
 		}
 	}
 }
