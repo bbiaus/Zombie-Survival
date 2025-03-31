@@ -195,5 +195,31 @@ void Update()
             Debug.Log("Recargaste! Balas en cargador: " + currentAmmo + " | Cargadores restantes: " + totalMags);
         }
     }
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Min(currentAmmo + amount, maxAmmoPerMag);
+        Debug.Log($"Munición añadida: {currentAmmo}/{maxAmmoPerMag}");
+    }
+
+// En el script Gun
+    public void AddAmmoClip()
+    {
+        if (totalMags < maxMags)
+        {
+            totalMags++;
+            Debug.Log($"Cargadores disponibles: {totalMags}/{maxMags}");
+        }
+        else
+        {
+            Debug.Log("Ya tienes el máximo de cargadores.");
+        }
+    }
+
+    public int GetTotalMags()
+    {
+        return totalMags;
+    }
+
+
 
 }
