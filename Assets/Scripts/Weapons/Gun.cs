@@ -25,6 +25,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private Vector3 sprintPosition = new Vector3(0.3f, -0.25f, 0.3f); // Posición al correr
     [SerializeField] private Quaternion sprintRotation = Quaternion.Euler(10f, -30f, 0f);
     [SerializeField] private float transitionSpeed = 10f; // Velocidad de interpolación
+    [SerializeField] private GameObject crosshair; // Referencia al Crosshair
+
 
 
     private StarterAssetsInputs input; // Referencia al script de inputs
@@ -38,23 +40,59 @@ public class Gun : MonoBehaviour
         input = FindAnyObjectByType<StarterAssetsInputs>(); // Busca el script de input en la escena
     }
 
-    private void Update()
+    private bool isReturningFromSprint = false; // Indica si el arma está en transición después de correr
+
+void Update()
+{
+    bool isSprinting = input.sprint;
+
+    // Si empieza a correr, activar la bandera para bloquear disparo
+    if (isSprinting)
     {
-        if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime) // Nuevo sistema de entrada
-        {
-            nextFireTime = Time.time + fireRate;
-            Shoot();
-        }
-
-        bool isSprinting = input.sprint;
-
-        Vector3 targetPosition = isSprinting ? sprintPosition : normalPosition;
-        Quaternion targetRotation = isSprinting ? sprintRotation : normalRotation;
-
-        // Interpola suavemente entre la posición actual y la posición objetivo
-        gunTransform.localPosition = Vector3.Lerp(gunTransform.localPosition, targetPosition, Time.deltaTime * transitionSpeed);
-        gunTransform.localRotation = Quaternion.Slerp(gunTransform.localRotation, targetRotation, Time.deltaTime * transitionSpeed);
+        isReturningFromSprint = true;
     }
+
+    // Verificar si el arma llegó a su posición normal
+    if (!isSprinting && isReturningFromSprint)
+    {
+        float distance = Vector3.Distance(gunTransform.localPosition, normalPosition);
+        if (distance < 0.01f) // Si ya casi llegó a su posición
+        {
+            isReturningFromSprint = false; // Permitir disparar
+        }
+    }
+
+    // Solo permite disparar si no está corriendo y el arma terminó de volver a su posición
+    if (!isSprinting && !isReturningFromSprint && Mouse.current.leftButton.isPressed && Time.time >= nextFireTime)
+    {
+        nextFireTime = Time.time + fireRate;
+        Shoot();
+    }
+
+    // Transición entre posiciones
+    Vector3 targetPosition = isSprinting ? sprintPosition : normalPosition;
+    Quaternion targetRotation = isSprinting ? sprintRotation : normalRotation;
+    gunTransform.localPosition = Vector3.Lerp(gunTransform.localPosition, targetPosition, Time.deltaTime * transitionSpeed);
+    gunTransform.localRotation = Quaternion.Slerp(gunTransform.localRotation, targetRotation, Time.deltaTime * transitionSpeed);
+
+    // Ocultar HUD al correr
+    if (crosshair != null)
+    {
+        if (isSprinting)
+        {
+            crosshair.SetActive(false); // Oculta el crosshair mientras corre
+        }
+        if(isReturningFromSprint)
+        {
+            crosshair.SetActive(false); // Oculta el crosshair mientras esta en transición
+        }
+        else
+        {
+            crosshair.SetActive(true); // Muestra el crosshair al dejar de correr
+        }
+    }
+}
+
 
     private IEnumerator RecoilEffect()
     {
