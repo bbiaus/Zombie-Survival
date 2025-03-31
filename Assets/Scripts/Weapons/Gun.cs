@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
     [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private CasingPool casingPool;  // Referencia al pool de casquillos
     [SerializeField] private float fireRate = 0.2f;
     [SerializeField] private Camera playerCamera;  // Cámara en primera persona
     [SerializeField] private AudioSource gunAudioSource;  // Sonido del arma
@@ -18,8 +19,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float recoilAmount = 0.1f; // Distancia del retroceso hacia atrás
     [SerializeField] private float recoilSpeed = 5f; // Velocidad con la que vuelve a su posición original
     [SerializeField] private GameObject bulletCasingPrefab; // Prefab del casquillo
-    [SerializeField] private Transform casingEjectPoint; // Punto donde se expulsan los casquillos
-    [SerializeField] private CasingPool casingPool;  // Referencia al pool de casquillos
+    [SerializeField] private Transform casingEjectPoint; // Punto donde se expulsan los casquillos    
     [SerializeField] private Vector3 normalPosition = new Vector3(0.33f, -0.33f, 1f); // Posición normal
     [SerializeField] private Quaternion normalRotation = Quaternion.Euler(0f, -1.79f, 0f);
     [SerializeField] private Vector3 sprintPosition = new Vector3(0.3f, -0.25f, 0.3f); // Posición al correr
