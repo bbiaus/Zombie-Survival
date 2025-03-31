@@ -26,6 +26,11 @@ public class Gun : MonoBehaviour
     [SerializeField] private Quaternion sprintRotation = Quaternion.Euler(10f, -30f, 0f);
     [SerializeField] private float transitionSpeed = 10f; // Velocidad de interpolación
     [SerializeField] private GameObject crosshair; // Referencia al Crosshair
+    [SerializeField] private int maxAmmoPerMag = 30; // Balas por cargador
+    [SerializeField] private int currentAmmo; // Balas actuales en el cargador
+    [SerializeField] private int totalMags = 3; // Cargadores disponibles
+    [SerializeField] private int maxMags = 5; // Límite de cargadores
+
 
 
 
@@ -36,6 +41,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        currentAmmo = maxAmmoPerMag; // Cargar el arma al inicio
         originalPosition = gunTransform.localPosition; // Guarda la posición inicial del arma
         input = FindAnyObjectByType<StarterAssetsInputs>(); // Busca el script de input en la escena
     }
@@ -45,6 +51,11 @@ public class Gun : MonoBehaviour
 void Update()
 {
     bool isSprinting = input.sprint;
+
+    if (Keyboard.current.rKey.wasPressedThisFrame)
+    {
+        Reload();
+    }
 
     // Si empieza a correr, activar la bandera para bloquear disparo
     if (isSprinting)
@@ -58,7 +69,7 @@ void Update()
         float distance = Vector3.Distance(gunTransform.localPosition, normalPosition);
         if (distance < 0.01f) // Si ya casi llegó a su posición
         {
-            isReturningFromSprint = false; // Permitir disparar
+            isReturningFromSprint = false; // Ya volvio el arma a su posición normal
         }
     }
 
@@ -69,27 +80,18 @@ void Update()
         Shoot();
     }
 
+    
+
     // Transición entre posiciones
     Vector3 targetPosition = isSprinting ? sprintPosition : normalPosition;
     Quaternion targetRotation = isSprinting ? sprintRotation : normalRotation;
     gunTransform.localPosition = Vector3.Lerp(gunTransform.localPosition, targetPosition, Time.deltaTime * transitionSpeed);
     gunTransform.localRotation = Quaternion.Slerp(gunTransform.localRotation, targetRotation, Time.deltaTime * transitionSpeed);
 
-    // Ocultar HUD al correr
+    // Ocultar HUD al correr o mientras el arma está en transición
     if (crosshair != null)
     {
-        if (isSprinting)
-        {
-            crosshair.SetActive(false); // Oculta el crosshair mientras corre
-        }
-        if(isReturningFromSprint)
-        {
-            crosshair.SetActive(false); // Oculta el crosshair mientras esta en transición
-        }
-        else
-        {
-            crosshair.SetActive(true); // Muestra el crosshair al dejar de correr
-        }
+        crosshair.SetActive(!(isSprinting || isReturningFromSprint)); // si NO esta corriendo o NO esta volviendo del sprint
     }
 }
 
@@ -114,10 +116,18 @@ void Update()
         gunTransform.localPosition = originalPosition;
     }
 
-
+    // Método para disparar la bala
+    // Se llama al presionar el botón de disparo
     private void Shoot()
     {
-        Bullet bullet = bulletPool.GetBullet();
+
+        if (currentAmmo <= 0) //Verifica si hay municion disponible
+        {
+            Debug.Log("Sin balas, recarga!"); //aca mas adelante voy a agregar sonido, y quizas algun efecto
+            return;
+        }
+
+        Bullet bullet = bulletPool.GetBullet(); //saco una bala del pool
         if (bullet == null) return;
 
         Vector3 shootDirection = GetShootDirection();
@@ -134,6 +144,8 @@ void Update()
 
         // Expulsa casquillo
         EjectCasing();
+
+        currentAmmo--; // Restar una bala al disparar
     }
 
 
@@ -164,6 +176,24 @@ void Update()
 
         // Aplica torque para que rote de forma variada
         casingRb.AddTorque(Random.insideUnitSphere * Random.Range(0.2f, 0.8f), ForceMode.Impulse);
+    }
+
+    private void Reload() //Método para recargar el arma
+    // Se llama al presionar la tecla R
+    {
+        if (currentAmmo == maxAmmoPerMag || totalMags <= 0)
+        {
+            Debug.Log("No necesitas recargar o no tienes más cargadores!");
+            return;
+        }
+
+        int bulletsToReload = maxAmmoPerMag - currentAmmo;
+        if (totalMags > 0)
+        {
+            totalMags--; // Gastar un cargador
+            currentAmmo = maxAmmoPerMag; // Recargar al máximo
+            Debug.Log("Recargaste! Balas en cargador: " + currentAmmo + " | Cargadores restantes: " + totalMags);
+        }
     }
 
 }
