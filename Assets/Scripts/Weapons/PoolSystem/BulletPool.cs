@@ -7,6 +7,9 @@ public class BulletPool : MonoBehaviour
 
     private Queue<Bullet> bulletPool = new Queue<Bullet>();
 
+    // Singleton para el acceso global al pool de balas
+    public static BulletPool Instance { get; private set; }
+
     private void Start()
     {
         // Preinstanciar las balas según el tamaño definido en el ScriptableObject
@@ -20,6 +23,16 @@ public class BulletPool : MonoBehaviour
                 bulletPool.Enqueue(bullet);
             }
         }
+    }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
 
     public Bullet GetBullet()

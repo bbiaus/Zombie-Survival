@@ -355,5 +355,27 @@ namespace StarterAssets
 				footstepAudio.Play();
 			}
 		}
+
+		// Metodo para obtener la dirección donde mira el player
+		// Se utiliza para disparar el proyectil en la dirección correcta
+		// Se le pasa el transform del punto de disparo (firePoint) para calcular la dirección
+		public Vector3 GetPlayerDirection(Transform firePoint)
+		{
+			Camera cam = _mainCamera.GetComponent<Camera>();
+			if (cam == null)
+			{
+				Debug.LogError("No se encuentra una camara en FirstPersonLook.cs");
+				return transform.forward;
+			}
+
+			Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+			if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+			{
+				return (hit.point - firePoint.position).normalized;
+			}
+
+			return cam.transform.forward;
+		}
+		
 	}
 }
