@@ -178,6 +178,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5854187048661602228, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1516928881}
+    - targetCorrespondingSourceObject: {fileID: 5854187048661602228, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 265397695}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1720347259650587357, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
       insertIndex: -1
@@ -186,6 +189,11 @@ PrefabInstance:
 --- !u!4 &8774334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5854187048661602228, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
+  m_PrefabInstance: {fileID: 8774333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &8774335 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8852656600286757812, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
   m_PrefabInstance: {fileID: 8774333}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &207184796
@@ -296,6 +304,37 @@ Transform:
   m_Children:
   - {fileID: 325207639}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &265397694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 265397695}
+  m_Layer: 0
+  m_Name: audioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &265397695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265397694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.166, z: -0.045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8774334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &325207638
 GameObject:
@@ -1618,6 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firepoint: {fileID: 1516928881}
+  _audioSource: {fileID: 8774335}
 --- !u!1 &1738826369
 GameObject:
   m_ObjectHideFlags: 0

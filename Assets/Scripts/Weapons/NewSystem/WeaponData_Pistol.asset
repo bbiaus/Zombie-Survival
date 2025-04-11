@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c755f781d76bd45aa83da1b0fe8644, type: 3}
-  m_Name: WeaponData
+  m_Name: WeaponData_Pistol
   m_EditorClassIdentifier: 
   _weaponPrefab: {fileID: 1720347259650587357, guid: c8ac28de0be9b104b8a41367986e7a04, type: 3}
   _damage: 10
   _fireRate: 1
   _force: 50
+  _shootSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}

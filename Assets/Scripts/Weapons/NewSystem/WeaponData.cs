@@ -9,7 +9,8 @@ namespace Weapons.NewSystem.Data
         [SerializeField] private float _damage;
         [SerializeField] private float _fireRate;
         [SerializeField] private float _force;
-        
+        [SerializeField] private AudioClip _shootSound;
+
         //[SerializeField] private GameObject _projectilePrefab;
         //[SerializeField] private GameObject _muzzleFlashPrefab;
         //[SerializeField] private GameObject _impactEffectPrefab;
@@ -20,6 +21,7 @@ namespace Weapons.NewSystem.Data
         public float Damage => _damage;
         public float FireRate => _fireRate;
         public float Force => _force;
+        public AudioClip ShootSound => _shootSound;
         //public GameObject ProjectilePrefab => _projectilePrefab;
 
     }

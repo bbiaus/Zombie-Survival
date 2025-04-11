@@ -7,7 +7,11 @@ namespace WeaponSystem
     public class Weapon : MonoBehaviour
     {
         [SerializeField] private Transform _firepoint; // Punto de aparición de la bala
+        [SerializeField] private AudioSource _audioSource; // Sonido del disparo
         private WeaponData _weaponData;
+
+        
+
 
         public Transform FirePoint => _firepoint; //get de firepoint
 
@@ -33,9 +37,9 @@ namespace WeaponSystem
                 Bullet bullet = BulletPool.Instance.GetBullet(); //saco una bala del pool
                 if (bullet == null) return;
 
-                
-
                 bullet.Shoot(_firepoint.position, Quaternion.LookRotation(shootDirection));
+                //// Activa el sonido de disparo
+                if (_weaponData.ShootSound != null && _audioSource != null) _audioSource.PlayOneShot(_weaponData.ShootSound, 0.5f);
 
                 Debug.Log($"Shooting with damage: {_weaponData.Damage}, fire rate: {_weaponData.FireRate}, force: {_weaponData.Force}");
             }
