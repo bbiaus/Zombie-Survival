@@ -8,6 +8,7 @@ namespace WeaponSystem
     {
         [SerializeField] private Transform _firepoint; // Punto de aparición de la bala
         [SerializeField] private AudioSource _audioSource; // Sonido del disparo
+        [SerializeField] private ParticleSystem _muzzleFlash; // Efecto de destello al disparar
         private WeaponData _weaponData;
 
         
@@ -38,10 +39,10 @@ namespace WeaponSystem
                 if (bullet == null) return;
 
                 bullet.Shoot(_firepoint.position, Quaternion.LookRotation(shootDirection));
+                 // Activa el efecto de disparo
+                if (_muzzleFlash != null) _muzzleFlash.Play();
                 //// Activa el sonido de disparo
-                if (_weaponData.ShootSound != null && _audioSource != null) _audioSource.PlayOneShot(_weaponData.ShootSound, 0.5f);
-
-                Debug.Log($"Shooting with damage: {_weaponData.Damage}, fire rate: {_weaponData.FireRate}, force: {_weaponData.Force}");
+                if (_weaponData.ShootSound != null && _audioSource != null) _audioSource.PlayOneShot(_weaponData.ShootSound, 0.15f);
             }
     }
 }
