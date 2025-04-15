@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2066461308124542692}
   - component: {fileID: 6554870738805096853}
   - component: {fileID: 8867547330133927870}
+  - component: {fileID: 657163863383459615}
   m_Layer: 0
   m_Name: Pine_C
   m_TagString: Untagged
@@ -121,6 +122,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5.9133763, z: 1.6354637}
   m_Center: {x: 0, y: 2.4566882, z: -0.31773186}
+--- !u!208 &657163863383459615
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722164173232303198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.956688, z: 0.817732}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.456688, z: -0.3177319}
+  m_TimeToStationary: 0.5
 --- !u!1 &6038694552676387882
 GameObject:
   m_ObjectHideFlags: 0

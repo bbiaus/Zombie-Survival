@@ -11,11 +11,11 @@ public class ShelterDoorTrigger : MonoBehaviour
             shelterDoor.SetBool("Abrir", true);
         }
 
-        if (other.CompareTag("Follower"))
+        /*if (other.CompareTag("Civilian"))
         {
-            GameManager.Instance.RescuedCharacter();
+            GameManager.Instance.CivilianRescued();
             Destroy(other.gameObject);
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)

@@ -137,5 +137,5 @@ AssetOrigin:
   productId: 213197
   packageName: Unity Terrain - URP Demo Scene
   packageVersion: 1.0.3
-  assetPath: Assets/Local/TerrainDemoScene_URP/Prefabs/Rocks/Textures/Stone_A/Stone_A_MaskMap.tif
+  assetPath: Assets/My Assets/TerrainHD/Prefabs/Rocks/Textures/Stone_A/Stone_A_MaskMap.tif
   uploadId: 727820

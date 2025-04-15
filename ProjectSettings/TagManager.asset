@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Follower
   - AmmoPickup
+  - Civilian
+  - Zombie
+  - Shelter
   layers:
   - Default
   - TransparentFX

@@ -137,5 +137,5 @@ AssetOrigin:
   productId: 213197
   packageName: Unity Terrain - URP Demo Scene
   packageVersion: 1.0.3
-  assetPath: Assets/Local/TerrainDemoScene_URP/Terrain/Textures/Grass_B/Grass_B_MaskMap.tif
+  assetPath: Assets/My Assets/TerrainHD/Prefabs/Grass_B/Grass_B_MaskMap.tif
   uploadId: 727820

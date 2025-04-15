@@ -1,0 +1,121 @@
+using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
+
+public class Zombie : MonoBehaviour
+{
+    public Transform player;
+    private Animator animator;
+    private NavMeshAgent agent;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] zombieSounds;
+    [SerializeField] private float soundInterval = 3f;
+    [SerializeField] private float hearingDistance = 15f;
+    private float nextSoundTime = 0f;
+    public AudioClip idleSound;
+    public AudioClip chaseSound;
+    public AudioClip attackSound;
+    private string currentState = "";
+
+    [SerializeField] private float detectionRange = 15f;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private int health = 3;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private float attackCooldown = 1.5f;
+
+    private bool isAttacking = false;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
+    }
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void PlaySound(AudioClip clip, string state)
+    {
+        if (currentState == state) return;
+
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
+        currentState = state;
+    }
+
+    private void Update()
+    {
+        if (player == null) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        agent.SetDestination(player.position);
+
+        // Si el jugador está dentro del rango de detección, pero no de ataque
+        /*if (distanceToPlayer > attackRange)
+        {
+            animator.SetBool("isAttacking", false);
+            animator.SetBool("isChasing", true);
+            PlaySound(chaseSound, "chase");
+        }*/
+
+        // Si está dentro del rango de ataque, iniciar ataque
+        if (distanceToPlayer <= attackRange && !isAttacking)
+        {
+            animator.SetBool("isAttacking", true);
+            animator.SetBool("isChasing", false);
+            PlaySound(attackSound, "attack");
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+            animator.SetBool("isChasing", true);
+            PlaySound(chaseSound, "chase");
+        }
+
+        if (distanceToPlayer <= hearingDistance && Time.time >= nextSoundTime)
+        {
+            PlayRandomZombieSound();
+            nextSoundTime = Time.time + soundInterval + Random.Range(0f, 2f);
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+
+        // Acá iría la lógica para hacer daño al jugador
+        Debug.Log("¡El zombie atacó al jugador!");
+
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    void PlayRandomZombieSound()
+    {
+        if (zombieSounds.Length == 0) return;
+
+        int index = Random.Range(0, zombieSounds.Length);
+        audioSource.clip = zombieSounds[index];
+        audioSource.Play();
+    }
+
+    private void Die()
+    {
+        GameManager.Instance.ZombieKilled();
+        Destroy(gameObject);
+    }
+}

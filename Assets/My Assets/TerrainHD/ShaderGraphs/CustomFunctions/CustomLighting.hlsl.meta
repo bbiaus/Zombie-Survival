@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 213197
   packageName: Unity Terrain - URP Demo Scene
   packageVersion: 1.0.3
-  assetPath: Assets/Local/TerrainDemoScene_URP/ShaderGraphs/CustomFunctions/CustomLighting.hlsl
+  assetPath: Assets/My Assets/TerrainHD/ShaderGraphs/CustomFunctions/CustomLighting.hlsl
   uploadId: 727820

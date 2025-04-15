@@ -13,5 +13,5 @@ AssetOrigin:
   productId: 213197
   packageName: Unity Terrain - URP Demo Scene
   packageVersion: 1.0.3
-  assetPath: Assets/Local/TerrainDemoScene_URP/ShaderGraphs/WaterDepthBased.shadergraph
+  assetPath: Assets/My Assets/TerrainHD/ShaderGraphs/WaterDepthBased.shadergraph
   uploadId: 727820

@@ -1,46 +1,61 @@
+using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI; // Para manejar la UI
-using TMPro; 
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // Singleton para acceder desde otros scripts
-    private int score = 0;
-    private int rescuedCount = 0; // Contador de personajes rescatados
-    public TMP_Text civiliansSaved; // UI para mostrar los puntos
-    public TMP_Text totalScore;
+    public static GameManager Instance;
 
+    public int civiliansSaved = 0;
+    public int totalZombies = 0;
+    public TextMeshProUGUI civiliansSavedText;
+    public TextMeshProUGUI waveText;
 
-    void Awake()
+    private int currentWave = 0;
+    private int zombiesRemaining;
+
+    private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else
+        if (Instance == null)
+            Instance = this;
+    }
+
+    private void Start()
+    {
+        StartNewWave();
+    }
+
+    public void StartNewWave()
+    {
+        currentWave++;
+        waveText.text = "Wave: " + currentWave;
+
+        int numCivilians = 2 + currentWave; // Más civiles en cada oleada
+        int numZombies = 3 + (currentWave * 2); // Más zombies en cada oleada
+
+        zombiesRemaining = numZombies;
+        SpawnManager.Instance.SpawnWave(numCivilians, numZombies);
+    }
+
+    public void CivilianRescued()
+    {
+        civiliansSaved++;
+        civiliansSavedText.text = "Civilians Saved: " + civiliansSaved;
+    }
+
+    public void ZombieKilled()
+    {
+        zombiesRemaining--;
+
+        if (zombiesRemaining <= 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(NextWaveCountdown());
         }
     }
 
-    public void AddPoints(int points)
+    private IEnumerator NextWaveCountdown()
     {
-        score += points;
-        Debug.Log("Puntos: " + score);
-    }
-
-    public void RescuedCharacter()
-    {
-        rescuedCount++;
-        AddPoints(100);
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        if (civiliansSaved != null)
-        {
-            civiliansSaved.text = "Civiles Rescatados: " + rescuedCount;
-            totalScore.text = "Puntaje total: " + score;
-        }
+        yield return new WaitForSeconds(5f);
+        StartNewWave();
     }
 }
-
