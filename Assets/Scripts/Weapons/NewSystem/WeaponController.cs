@@ -48,14 +48,17 @@ namespace WeaponSystem
         public void Shoot()
         {
             if(!_canShoot) return; // Si no se puede disparar, salir de la función
+            if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+            
             if (_currentAmmo <= 0)
             {
                 Debug.Log("No ammo! Reload needed."); // Mensaje de error si no hay balas
+                _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío
                 return; // Salir de la función si no hay balas
             }
             _currentAmmo--; // Disminuir la cantidad de balas actuales
 
-            if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+            
             Vector3 shootDirection = playerController.GetPlayerDirection(_currentWeapon.FirePoint); // Obtener la dirección de disparo desde el weapon
             
             _currentWeapon.Shoot(shootDirection); // Disparar el proyectil desde el arma actual
