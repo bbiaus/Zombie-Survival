@@ -1,17 +1,20 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
+
 public class Life: MonoBehaviour
 {
-    public float Lifee=100;
-    public float LifeMax=100;
-    
-    public Image HealthBar;
+    public float life=100;
+    public float lifemax=100;
+    public Image healthbar;
+    public Text numberlife;
     void Update(){
-        updatehealth();
+        _interface();
     }
 
-    void updatehealth(){
-        HealthBar.fillAmount=Lifee/LifeMax;
+    void _interface()
+    {
+        healthbar.fillAmount = life/lifemax;
+        numberlife.text="Life: " + life.ToString("f0");
     }
-
 }
