@@ -18,3 +18,4 @@ MonoBehaviour:
   _shootSound: {fileID: 8300000, guid: 0d59d70a8bec7474badb90d923b47481, type: 3}
   _maxAmmoPerMag: 30
   _maxMags: 4
+  reloadTime: 2
