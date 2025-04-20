@@ -50,7 +50,7 @@ namespace WeaponSystem
 
                 // se le aplica una rotación aleatoria en Z para que se vea distinto
                 float random = Random.Range(0f, 360f);
-                flash.transform.Rotate(0f, 0f, random);
+                //flash.transform.Rotate(0f, 0f, random);
 
                 bullet.Shoot(_firePoint.position, Quaternion.LookRotation(shootDirection));
                 
