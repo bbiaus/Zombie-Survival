@@ -855,8 +855,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6cc2a128d8f68468ecb5f92d276e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civiliansSaved: {fileID: 0}
-  totalScore: {fileID: 0}
+  civiliansSaved: 0
+  totalZombies: 0
+  civiliansSavedText: {fileID: 0}
+  waveText: {fileID: 0}
 --- !u!4 &1101944292
 Transform:
   m_ObjectHideFlags: 0
@@ -1910,6 +1912,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 722620792}
     m_Modifications:
+    - target: {fileID: 1020954014535066383, guid: c13ac440ae6235143bad0fa12e5f9952, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: c978dc52d0d60e649be3faeb374be094, type: 3}
+    - target: {fileID: 1020954014535066383, guid: c13ac440ae6235143bad0fa12e5f9952, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c978dc52d0d60e649be3faeb374be094, type: 3}
+    - target: {fileID: 3955197783691601454, guid: c13ac440ae6235143bad0fa12e5f9952, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 1358017bba81cb643a991fd5442d1c4f, type: 3}
+    - target: {fileID: 3955197783691601454, guid: c13ac440ae6235143bad0fa12e5f9952, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1358017bba81cb643a991fd5442d1c4f, type: 3}
     - target: {fileID: 4592088453921297793, guid: c13ac440ae6235143bad0fa12e5f9952, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.013882875
