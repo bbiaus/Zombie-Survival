@@ -14,6 +14,7 @@ namespace WeaponSystem
         [SerializeField] private bool _canShoot = true; // Variable para controlar si se puede disparar o no
         private int _currentAmmo; // Balas actuales en el cargador
         private int _remainingMags; // Cargadores restantes
+        private bool _isReloading = false;
 
 
         private void Start()
@@ -37,7 +38,9 @@ namespace WeaponSystem
             }
             if (Input.GetKeyDown(KeyCode.R)) //Tecla R para recargar
             {
+                
                 Reload();
+                
             }
         }
         private IEnumerator WaitForNextShot() //waitrof
@@ -47,7 +50,7 @@ namespace WeaponSystem
         }
         public void Shoot()
         {
-            if(!_canShoot) return; // Si no se puede disparar, salir de la función
+            if (!_canShoot || _isReloading) return; // Si no se puede disparar, salir de la función
             if(_currentWeapon == null) return; // Si no hay arma, salir de la función
             
             if (_currentAmmo <= 0)
@@ -71,10 +74,18 @@ namespace WeaponSystem
 
         public void Reload()
         {
-            if (_remainingMags <= 0) return; // No hay más mags disponibles
+            if (_remainingMags <= 0 || _isReloading) return; // No hay más mags disponibles
+
+            _isReloading = true; // Activar el estado de recarga
             _remainingMags--; // Disminuir la cantidad de cargadores restantes
             _currentAmmo = _weaponData.MaxAmmoPerMag; // Recargar el cargador
+
+            _currentWeapon.reloadAnim(); // Reproducir la animación de recarga del arma
+            _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío (temporalmente)
+
             Debug.Log("Reloaded. Ammo: " + _currentAmmo + "/" + _weaponData.MaxAmmoPerMag + " | Mags:" + _remainingMags); // Mensaje de depuración al recargar
+            
+            StartCoroutine(FinishReloadAnimation()); // Esperar a que termine la animación
         }
 
         public void AddMagazines(int amount) //Esta funcion sirve para poder obtener cargadores extra de power ups
@@ -87,5 +98,13 @@ namespace WeaponSystem
             // Mensaje de depuración con la cantidad de cargadores restantes
             Debug.Log($"Added {amount} magazines. Remaining: {_remainingMags}/{_weaponData.MaxMags}"); 
         }
+
+        private IEnumerator FinishReloadAnimation()
+        {
+            yield return new WaitForSeconds(_weaponData.ReloadTime); // Esto lo tomás del ScriptableObject
+
+            _isReloading = false; // Ya se puede disparar
+        }
+
     }
 }
