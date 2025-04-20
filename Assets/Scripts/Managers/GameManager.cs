@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int totalZombies = 0;
     public TextMeshProUGUI civiliansSavedText;
     public TextMeshProUGUI waveText;
+    
 
     private int currentWave = 0;
     private int zombiesRemaining;
@@ -57,5 +58,20 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         StartNewWave();
+    }
+
+    /*public void PlayerDied()
+    {
+       ToggleSceneSelector.Instance.TriggerGameOver(); 
+        
+    }*/
+       void Update()
+    {
+        // Prueba para activar el Game Over con la tecla "j"
+        if (Input.GetKeyDown(KeyCode.J))
+        {   
+            Debug.Log("se presiono la tecla j");
+            ToggleSceneSelector.Instance.TriggerGameOver();
+        }
     }
 }
