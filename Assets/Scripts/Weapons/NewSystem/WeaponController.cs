@@ -1,5 +1,6 @@
 using System.Collections;
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 using Weapons.NewSystem.Data;
 
@@ -7,9 +8,9 @@ namespace WeaponSystem
 {
     public class WeaponController : MonoBehaviour
     {
-        [SerializeField] private Weapon _currentWeapon; // Referencia al arma actual
+        private Weapon _currentWeapon; // Referencia al arma actual
         [SerializeField] private FirstPersonController playerController; // Referencia al controlador del jugador
-        //[SerializeField] private Transform _spawnPosition; equivale a transform.position
+        [SerializeField] private Transform _spawnPosition; //equivale a transform.position
         [SerializeField] private WeaponData _weaponData;
         [SerializeField] private bool _canShoot = true; // Variable para controlar si se puede disparar o no
         private int _currentAmmo; // Balas actuales en el cargador
@@ -19,6 +20,8 @@ namespace WeaponSystem
 
         private void Start()
         {
+
+
             if (_currentWeapon != null)
             {
                 _currentWeapon.SetWeaponData(_weaponData); // Asignar los datos del arma al objeto Weapon
@@ -104,6 +107,23 @@ namespace WeaponSystem
             yield return new WaitForSeconds(_weaponData.ReloadTime); // Esto lo tomás del ScriptableObject
 
             _isReloading = false; // Ya se puede disparar
+        }
+
+        public void EquipWeapon(WeaponData weapon)
+        {
+            _weaponData = weapon;
+            if(_currentWeapon != null)
+            {
+                Destroy(_currentWeapon); // Destruir el arma actual si existe
+            }
+            if(weapon.WeaponPrefab != null)
+            {
+                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+            }
+            else
+            {
+                Debug.LogError("No hay ninguna weapon prefab asignada al WeaponController."); // Mensaje de error si no hay prefab de arma asignado
+            }
         }
 
     }

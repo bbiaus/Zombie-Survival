@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba79db3c4d2a664ca6e0bf76ff776df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3191293194562004155, guid: a851be57ad5d99840a0d593f027dfebf, type: 3}
-  spawnPoints:
-  - {fileID: 325207639}
+  civilianPrefab: {fileID: 0}
+  zombiePrefab: {fileID: 0}
+  civilianSpawnPoints: []
+  zombieSpawnPoints: []
 --- !u!4 &263156476
 Transform:
   m_ObjectHideFlags: 0
@@ -317,6 +318,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4089090657677242089, guid: 6a4cca3109fcff44da3e2137305470b6, type: 3}
   m_PrefabInstance: {fileID: 486206794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &601705114 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1132457683012477958, guid: 1bf215c1a0236ac4cada0032499931fb, type: 3}
+  m_PrefabInstance: {fileID: 1550245551}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &708034371
 GameObject:
@@ -810,8 +816,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6cc2a128d8f68468ecb5f92d276e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civiliansSaved: {fileID: 0}
-  totalScore: {fileID: 0}
+  civiliansSaved: 0
+  totalZombies: 0
+  civiliansSavedText: {fileID: 0}
+  waveText: {fileID: 0}
 --- !u!4 &1101944292
 Transform:
   m_ObjectHideFlags: 0
@@ -1336,6 +1344,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819557670796910296, guid: 1bf215c1a0236ac4cada0032499931fb, type: 3}
+      propertyPath: _shootSound
+      value: 
+      objectReference: {fileID: 601705114}
     - target: {fileID: 7891474276371900112, guid: 1bf215c1a0236ac4cada0032499931fb, type: 3}
       propertyPath: m_Name
       value: NewAssaultRiflePrefab 1
