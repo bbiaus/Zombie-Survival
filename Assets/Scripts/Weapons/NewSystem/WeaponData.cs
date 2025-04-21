@@ -12,6 +12,8 @@ namespace Weapons.NewSystem.Data
         [SerializeField] private AudioClip _shootSound;
         [SerializeField] private int _maxAmmoPerMag;
         [SerializeField] private int _maxMags;
+        [SerializeField] private float reloadTime;
+
 
 
 
@@ -28,6 +30,7 @@ namespace Weapons.NewSystem.Data
         public AudioClip ShootSound => _shootSound;
         public int MaxAmmoPerMag => _maxAmmoPerMag;
         public int MaxMags => _maxMags;
+        public float ReloadTime => reloadTime;
         //public GameObject ProjectilePrefab => _projectilePrefab;
 
     }
