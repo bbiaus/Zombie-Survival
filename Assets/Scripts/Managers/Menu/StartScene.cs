@@ -32,7 +32,7 @@ public class ToggleSceneSelector : MonoBehaviour
         // Configurar listeners para los toggles
         toggleScene1.onValueChanged.AddListener(delegate { OnToggleChanged(toggleScene1, "BorisScene"); });
         toggleScene2.onValueChanged.AddListener(delegate { OnToggleChanged(toggleScene2, "DafScene"); });
-        toggleScene3.onValueChanged.AddListener(delegate { OnToggleChanged(toggleScene3, "LautaScene"); });
+        toggleScene3.onValueChanged.AddListener(delegate { OnToggleChanged(toggleScene3, "MainScene"); });
 
         // Asegurar que inicialmente no se pueda presionar el botón "Start"
         startButton.interactable = false;
@@ -93,14 +93,5 @@ public class ToggleSceneSelector : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void ReplayGame()
-    {
-    string replayScene = PlayerPrefs.GetString("SelectedScene", "" ); //recupero escena guardada
-    if (!string.IsNullOrEmpty(replayScene))
-    {
-        Time.timeScale = 1; //reanudmos tiempo 
-        SceneManager.LoadScene(replayScene); //cargar escena seleccionada con aterioridad
-    }
-    }
-
+    
 }
