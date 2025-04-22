@@ -22,6 +22,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] private float attackCooldown = 1.5f;
     private bool isAttacking = false;
     private bool isDead = false;
+    public Life playerHealth;
 
     private void Awake()
     {
@@ -31,7 +32,13 @@ public class Zombie : MonoBehaviour
     }
     private void Start()
     {
+        GameObject playerLife = GameObject.FindGameObjectWithTag("Player");
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (playerLife != null)
+        {
+            playerHealth = playerLife.GetComponent<Life>();
+            Debug.Log("Referencia a Life del player asignada correctamente.");
+        }
     }
 
     private void PlaySound(AudioClip clip, string state)
@@ -80,9 +87,10 @@ public class Zombie : MonoBehaviour
     private IEnumerator Attack()
     {
         isAttacking = true;
-
-        // Acá iría la lógica para hacer daño al jugador
-        Debug.Log("¡El zombie atacó al jugador!");
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(10f);
+        }
 
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;

@@ -17,7 +17,7 @@ public class ZombieHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= damageAmount;
-        Debug.Log("Zombie recibió daño. Vida restante: " + health);
+        Debug.Log("Zombie recibió daño. Vida restante: " + currentHealth);
 
         if (currentHealth <= 0)
         {
