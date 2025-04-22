@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Zombie : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     private Animator animator;
     private NavMeshAgent agent;
     private AudioSource audioSource;
@@ -16,14 +16,12 @@ public class Zombie : MonoBehaviour
     public AudioClip chaseSound;
     public AudioClip attackSound;
     private string currentState = "";
-
     [SerializeField] private float detectionRange = 15f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private int health = 3;
     [SerializeField] private int damage = 1;
     [SerializeField] private float attackCooldown = 1.5f;
-
     private bool isAttacking = false;
+    private bool isDead = false;
 
     private void Awake()
     {
@@ -52,35 +50,30 @@ public class Zombie : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        agent.SetDestination(player.position);
+        if (!isDead)
+        {
+            agent.SetDestination(player.position);
 
-        // Si el jugador está dentro del rango de detección, pero no de ataque
-        /*if (distanceToPlayer > attackRange)
-        {
-            animator.SetBool("isAttacking", false);
-            animator.SetBool("isChasing", true);
-            PlaySound(chaseSound, "chase");
-        }*/
+            // Si está dentro del rango de ataque, iniciar ataque
+            if (distanceToPlayer <= attackRange && !isAttacking)
+            {
+                animator.SetBool("isAttacking", true);
+                animator.SetBool("isChasing", false);
+                PlaySound(attackSound, "attack");
+                StartCoroutine(Attack());
+            }
+            else
+            {
+                animator.SetBool("isAttacking", false);
+                animator.SetBool("isChasing", true);
+                PlaySound(chaseSound, "chase");
+            }
 
-        // Si está dentro del rango de ataque, iniciar ataque
-        if (distanceToPlayer <= attackRange && !isAttacking)
-        {
-            animator.SetBool("isAttacking", true);
-            animator.SetBool("isChasing", false);
-            PlaySound(attackSound, "attack");
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            animator.SetBool("isAttacking", false);
-            animator.SetBool("isChasing", true);
-            PlaySound(chaseSound, "chase");
-        }
-
-        if (distanceToPlayer <= hearingDistance && Time.time >= nextSoundTime)
-        {
-            PlayRandomZombieSound();
-            nextSoundTime = Time.time + soundInterval + Random.Range(0f, 2f);
+            if (distanceToPlayer <= hearingDistance && Time.time >= nextSoundTime)
+            {
+                PlayRandomZombieSound();
+                nextSoundTime = Time.time + soundInterval + Random.Range(0f, 2f);
+            }
         }
     }
 
@@ -95,15 +88,7 @@ public class Zombie : MonoBehaviour
         isAttacking = false;
     }
 
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
 
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
     void PlayRandomZombieSound()
     {
         if (zombieSounds.Length == 0) return;
@@ -113,9 +98,22 @@ public class Zombie : MonoBehaviour
         audioSource.Play();
     }
 
-    private void Die()
+    public void Die()
     {
         GameManager.Instance.ZombieKilled();
-        Destroy(gameObject);
+
+        animator.SetBool("isDead", true);
+        GetComponent<NavMeshAgent>().enabled = false; // Para que deje de moverse
+        isDead = true;
+        // Detenemos todas las animaciones después de un breve delay (para dejarla arrancar)
+        StartCoroutine(DisableAnimatorAfterDelay());
+
+        Destroy(gameObject, 2f);
+    }
+
+    IEnumerator DisableAnimatorAfterDelay()
+    {
+        yield return new WaitForSeconds(1.15f); // Tiempo suficiente para que arranque la animación de muerte
+        animator.enabled = false;
     }
 }

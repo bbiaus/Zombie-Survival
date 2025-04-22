@@ -14,7 +14,6 @@ namespace Weapons.NewSystem.Data
         [SerializeField] private int _maxMags;
 
 
-
         //[SerializeField] private GameObject _projectilePrefab;
         //[SerializeField] private GameObject _muzzleFlashPrefab;
         //[SerializeField] private GameObject _impactEffectPrefab;

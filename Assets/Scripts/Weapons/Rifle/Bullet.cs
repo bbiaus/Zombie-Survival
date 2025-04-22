@@ -4,9 +4,9 @@ using System.Collections;  // Necesario para IEnumerator
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float timeDestroy = 4f;
-    [SerializeField] private float bulletSpeed = 100f; // Velocidad de las balas
+    [SerializeField] private float bulletSpeed = 200f; // Velocidad de las balas
 
-    
+
     private Rigidbody rb;
     private BulletPool bulletPool;
     private bool isActive = false;
@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
 
     public void Shoot(Vector3 newPosition, Quaternion newRotation)
     {
+        Debug.Log("Pium Pium");
         transform.position = newPosition;
         transform.rotation = newRotation;
         isActive = true;
@@ -30,10 +31,33 @@ public class Bullet : MonoBehaviour
         StartCoroutine(ReturnBulletAfterTime());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        ReturnBullet();
+        Debug.Log("Entró en trigger con: " + other.name);
+
+        if (other.CompareTag("Head"))
+        {
+            Debug.Log("Colisiono con la Cabeza");
+            ZombieHealth zombie = other.GetComponentInParent<ZombieHealth>();
+            if (zombie != null)
+            {
+                zombie.ReceiveDamage(zombie.health); // Muerte instantánea
+            }
+        }
+        else if (other.CompareTag("Body"))
+        {
+            Debug.Log("Colisiono con el Cuerpo");
+            ZombieHealth zombie = other.GetComponentInParent<ZombieHealth>();
+            if (zombie != null)
+            {
+                zombie.ReceiveDamage(1);
+            }
+        }
+
+        ReturnBullet(); ; // destruir la bala
     }
+
+
 
     private IEnumerator ReturnBulletAfterTime()
     {
