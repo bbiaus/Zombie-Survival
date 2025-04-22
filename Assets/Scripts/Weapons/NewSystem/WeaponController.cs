@@ -1,5 +1,6 @@
 using System.Collections;
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 using Weapons.NewSystem.Data;
 
@@ -7,13 +8,14 @@ namespace WeaponSystem
 {
     public class WeaponController : MonoBehaviour
     {
-        [SerializeField] private Weapon _currentWeapon; // Referencia al arma actual
+        private Weapon _currentWeapon; // Referencia al arma actual
         [SerializeField] private FirstPersonController playerController; // Referencia al controlador del jugador
-        //[SerializeField] private Transform _spawnPosition; equivale a transform.position
+        [SerializeField] private Transform _spawnPosition; //equivale a transform.position
         [SerializeField] private WeaponData _weaponData;
         [SerializeField] private bool _canShoot = true; // Variable para controlar si se puede disparar o no
         private int _currentAmmo; // Balas actuales en el cargador
         private int _remainingMags; // Cargadores restantes
+        private bool _isReloading = false;
         public LayerMask hitLayers;
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
@@ -21,6 +23,8 @@ namespace WeaponSystem
 
         private void Start()
         {
+
+
             if (_currentWeapon != null)
             {
                 //Invoke("EnableShooting", 2.0f); // Espera 2 segundos
@@ -42,7 +46,9 @@ namespace WeaponSystem
             }
             if (Input.GetKeyDown(KeyCode.R)) //Tecla R para recargar
             {
+                
                 Reload();
+                
             }
         }
         private IEnumerator WaitForNextShot() //waitrof
@@ -52,9 +58,9 @@ namespace WeaponSystem
         }
         public void Shoot()
         {
-            if (!_canShoot) return; // Si no se puede disparar, salir de la función
-            if (_currentWeapon == null) return; // Si no hay arma, salir de la función
-
+            if (!_canShoot || _isReloading) return; // Si no se puede disparar, salir de la función
+            if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+            
             if (_currentAmmo <= 0)
             {
                 Debug.Log("No ammo! Reload needed."); // Mensaje de error si no hay balas
@@ -98,10 +104,18 @@ namespace WeaponSystem
 
         public void Reload()
         {
-            if (_remainingMags <= 0) return; // No hay más mags disponibles
+            if (_remainingMags <= 0 || _isReloading) return; // No hay más mags disponibles
+
+            _isReloading = true; // Activar el estado de recarga
             _remainingMags--; // Disminuir la cantidad de cargadores restantes
             _currentAmmo = _weaponData.MaxAmmoPerMag; // Recargar el cargador
+
+            _currentWeapon.reloadAnim(); // Reproducir la animación de recarga del arma
+            _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío (temporalmente)
+
             Debug.Log("Reloaded. Ammo: " + _currentAmmo + "/" + _weaponData.MaxAmmoPerMag + " | Mags:" + _remainingMags); // Mensaje de depuración al recargar
+            
+            StartCoroutine(FinishReloadAnimation()); // Esperar a que termine la animación
         }
 
         public void AddMagazines(int amount) //Esta funcion sirve para poder obtener cargadores extra de power ups
@@ -114,5 +128,30 @@ namespace WeaponSystem
             // Mensaje de depuración con la cantidad de cargadores restantes
             Debug.Log($"Added {amount} magazines. Remaining: {_remainingMags}/{_weaponData.MaxMags}");
         }
+
+        private IEnumerator FinishReloadAnimation()
+        {
+            yield return new WaitForSeconds(_weaponData.ReloadTime); // Esto lo tomás del ScriptableObject
+
+            _isReloading = false; // Ya se puede disparar
+        }
+
+        public void EquipWeapon(WeaponData weapon)
+        {
+            _weaponData = weapon;
+            if(_currentWeapon != null)
+            {
+                Destroy(_currentWeapon); // Destruir el arma actual si existe
+            }
+            if(weapon.WeaponPrefab != null)
+            {
+                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+            }
+            else
+            {
+                Debug.LogError("No hay ninguna weapon prefab asignada al WeaponController."); // Mensaje de error si no hay prefab de arma asignado
+            }
+        }
+
     }
 }

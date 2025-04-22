@@ -8,5 +8,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 26b0caab9062fbc46b1f3c002a7efcfa
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: ea937dfb4091d944795321d2ba843b5d
+  - enabled: 1
+    path: Assets/Scenes/BorisScene.unity
+    guid: 08b7b115c5092614cb9c9650c3543000
+  - enabled: 1
+    path: Assets/Scenes/DafScene.unity
+    guid: 45c57d2c4779bd44ea65b9bdf1a1620a
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 6fd2fdbec2e00e24ea9b54406badb321
+  - enabled: 1
+    path: Assets/Scenes/LautaScene.unity
+    guid: 03ee35202d7fde548bff3f8c44f3d51b
+  - enabled: 1
+    path: Assets/Scenes/LautaSceneTest.unity
+    guid: 27b786d150757bc489948ed92b460c87
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 50052b6509d00174bad42884a0ad8f42
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

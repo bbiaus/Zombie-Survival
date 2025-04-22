@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using Weapons.NewSystem.Data;
+using WeaponSystem;
 #endif
 
 namespace StarterAssets
@@ -84,6 +87,11 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		//Weapon
+		[SerializeField] private WeaponController weaponController; // Referencia al controlador de armas
+		[SerializeField] private WeaponData initialWeapon; //arma inicial
+		private List<WeaponData> _weaponDataList = new(); // Lista de weapon data
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -107,6 +115,10 @@ namespace StarterAssets
 
 		private void Start()
 		{
+
+			AddWeapon(initialWeapon); // Agregar el arma inicial al inventario
+			weaponController.EquipWeapon(initialWeapon); // Equipar el arma inicial
+
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -355,7 +367,7 @@ namespace StarterAssets
 				footstepAudio.Play();
 			}
 		}
-
+		// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 		// Metodo para obtener la dirección donde mira el player
 		// Se utiliza para disparar el proyectil en la dirección correcta
 		// Se le pasa el transform del punto de disparo (firePoint) para calcular la dirección
@@ -376,6 +388,37 @@ namespace StarterAssets
 
 			return cam.transform.forward;
 		}
+		
+		
+
+		public void AddWeapon(WeaponData weaponData)
+		{
+			if(!_weaponDataList.Contains(weaponData))
+			{
+				_weaponDataList.Add(weaponData); // Agregar el weapon data a la lista
+			}
+			else
+			{
+				Debug.Log("Ya tienes esta arma en tu inventario.");
+			}
+		}
+		private int _weaponIndex = 0; // Índice del arma actual
+
+		private void CycleWeapon()
+		{
+			if(_weaponDataList.Count == 0) return; // Si no hay armas, salir
+
+			_weaponIndex++; // Incrementar el índice del arma actual
+
+			if(_weaponIndex >= _weaponDataList.Count) // Si el índice es mayor que la cantidad de armas
+			{
+				_weaponIndex = 0; // Reiniciar el índice
+			}
+
+			weaponController.EquipWeapon(_weaponDataList[_weaponIndex]); // Equipar el arma actual
+
+		}
+
 		
 	}
 }

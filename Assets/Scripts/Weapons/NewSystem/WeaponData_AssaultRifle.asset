@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c755f781d76bd45aa83da1b0fe8644, type: 3}
   m_Name: WeaponData_AssaultRifle
   m_EditorClassIdentifier: 
-  _weaponPrefab: {fileID: 941330749433133934, guid: 9d37c4b03f70902469490c8b6284e08a, type: 3}
+  _weaponPrefab: {fileID: 7819557670796910296, guid: 1bf215c1a0236ac4cada0032499931fb, type: 3}
   _damage: 10
   _fireRate: 0.1
   _shootSound: {fileID: 8300000, guid: 0d59d70a8bec7474badb90d923b47481, type: 3}
   _maxAmmoPerMag: 30
   _maxMags: 4
+  reloadTime: 2
