@@ -116,8 +116,12 @@ namespace StarterAssets
 		private void Start()
 		{
 
-			AddWeapon(initialWeapon); // Agregar el arma inicial al inventario
-			weaponController.EquipWeapon(initialWeapon); // Equipar el arma inicial
+			if (initialWeapon != null && weaponController != null) //Valido por las dudas de tener controller y arma inicial
+			{
+				AddWeapon(initialWeapon); // Agregar el arma inicial al inventario
+				weaponController.EquipWeapon(initialWeapon); // Equipar el arma inicial
+			}
+			
 
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
@@ -137,6 +141,12 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+
+			//weapons
+			if (Keyboard.current.qKey.wasPressedThisFrame)
+			{
+				CycleWeapon();
+			}
 		}
 
 		private void LateUpdate()
@@ -409,7 +419,7 @@ namespace StarterAssets
 			if(_weaponDataList.Count == 0) return; // Si no hay armas, salir
 
 			_weaponIndex++; // Incrementar el índice del arma actual
-
+			Debug.Log("Arma numero: " + _weaponIndex);
 			if(_weaponIndex >= _weaponDataList.Count) // Si el índice es mayor que la cantidad de armas
 			{
 				_weaponIndex = 0; // Reiniciar el índice

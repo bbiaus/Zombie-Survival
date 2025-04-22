@@ -7,8 +7,8 @@ public class AmmoPickup : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"Collided with: {other.gameObject.name}");
-
         if (!other.CompareTag("Player")) return;
+        
 
         var bridgeWeaponController = other.GetComponent<BridgeWeaponController>();
         if (bridgeWeaponController != null)

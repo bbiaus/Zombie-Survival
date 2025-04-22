@@ -28,13 +28,13 @@ namespace WeaponSystem
             if (_currentWeapon != null)
             {
                 //Invoke("EnableShooting", 2.0f); // Espera 2 segundos
-                _currentWeapon.SetWeaponData(_weaponData); // Asignar los datos del arma al objeto Weapon
-                _currentAmmo = _weaponData.MaxAmmoPerMag; // Inicializar las balas actuales en el cargador
-                _remainingMags = _weaponData.MaxMags; // Inicializar los cargadores restantes
+                EquipWeapon(_weaponData);   // Asignar el arma al controlador de armas
+                _currentAmmo = _weaponData.MaxAmmoPerMag;
+                _remainingMags = _weaponData.MaxMags;
             }
             else
             {
-                Debug.LogError("No hay ninguna weapon asignada al WeaponController."); // Mensaje de error si no hay arma asignada
+                Debug.Log("No hay ninguna weapon asignada al WeaponController."); // Mensaje de error si no hay arma asignada
             }
         }
         private void Update()
@@ -120,6 +120,7 @@ namespace WeaponSystem
 
         public void AddMagazines(int amount) //Esta funcion sirve para poder obtener cargadores extra de power ups
         {
+            if (_currentWeapon == null) return; // Si no hay arma, salir de la función
             if (amount <= 0) return; // Si la cantidad es menor o igual a cero, no hacer nada
             if (_remainingMags >= _weaponData.MaxMags) return; // Si ya se tiene el máximo de cargadores, no hacer nada
 
@@ -139,18 +140,26 @@ namespace WeaponSystem
         public void EquipWeapon(WeaponData weapon)
         {
             _weaponData = weapon;
-            if(_currentWeapon != null)
+            //Limpiar cualquier arma previa, manual o instanciada
+            foreach (Transform child in _spawnPosition)
             {
-                Destroy(_currentWeapon); // Destruir el arma actual si existe
+                Destroy(child.gameObject);
+                Debug.Log("ARMA VIEJA DESTRUIDA"); // Mensaje de depuración al destruir el arma anterior
             }
+
             if(weapon.WeaponPrefab != null)
             {
                 _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+                _currentWeapon.SetWeaponData(_weaponData);
+                _currentAmmo = _weaponData.MaxAmmoPerMag;
+                _remainingMags = _weaponData.MaxMags;
+
             }
             else
             {
-                Debug.LogError("No hay ninguna weapon prefab asignada al WeaponController."); // Mensaje de error si no hay prefab de arma asignado
+                Debug.LogError("No hay ningun weapon asignada al WeaponController."); // Mensaje de error si no hay prefab de arma asignado
             }
+            
         }
 
     }
