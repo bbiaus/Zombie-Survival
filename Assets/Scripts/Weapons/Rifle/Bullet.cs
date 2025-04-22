@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
 
     public void Shoot(Vector3 newPosition, Quaternion newRotation)
     {
-        Debug.Log("Pium Pium");
         transform.position = newPosition;
         transform.rotation = newRotation;
         isActive = true;
@@ -33,8 +32,6 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entró en trigger con: " + other.name);
-
         if (other.CompareTag("Head"))
         {
             Debug.Log("Colisiono con la Cabeza");

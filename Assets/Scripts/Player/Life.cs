@@ -15,6 +15,6 @@ public class Life: MonoBehaviour
     void _interface()
     {
         healthbar.fillAmount = life/lifemax;
-        numberlife.text="Life: " + life.ToString("f0");
+        //numberlife.text="Life: " + life.ToString("f0");
     }
 }
