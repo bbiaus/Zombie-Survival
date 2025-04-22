@@ -1,4 +1,5 @@
 using UnityEngine;
+using Weapons.NewSystem.Data;
 using WeaponSystem;
 
 public class BridgeWeaponController : MonoBehaviour
@@ -8,5 +9,9 @@ public class BridgeWeaponController : MonoBehaviour
     public void AddAmmo(int amount)
     {
         _weaponController.AddMagazines(amount); // Llama al método para agregar munición
+    }
+    public void EquipWeapon(WeaponData weapon)
+    {
+        _weaponController.EquipWeapon(weapon);
     }
 }
