@@ -970,10 +970,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolPowerUp
       objectReference: {fileID: 0}
-    - target: {fileID: 5773399876510048642, guid: 8f0a5b37d8055b4458f54e6bee0d8294, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5773399876510048669, guid: 8f0a5b37d8055b4458f54e6bee0d8294, type: 3}
       propertyPath: m_LocalPosition.x
       value: 205.64
@@ -2023,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7067486608251660056, guid: c9331574e6205de468ad9260d7e81588, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d6d63de9e48cb57449ed7fef65532a7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
