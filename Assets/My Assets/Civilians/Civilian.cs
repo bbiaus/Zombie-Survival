@@ -6,9 +6,7 @@ public class Civilian : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
-    private Animator animator;
     private bool isFollowing = false;
-    private AudioSource audioSource;
 
     private float deathTimer = 60f; // Tiempo límite para salvarlo
 
@@ -16,8 +14,6 @@ public class Civilian : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
         StartCoroutine(DeathCountdown());
     }
 
@@ -35,8 +31,6 @@ public class Civilian : MonoBehaviour
         {
             isFollowing = true;
             agent.speed = 3.5f;
-            animator.SetBool("isFollowing", true);
-            audioSource.Stop();
         }
         else if (other.CompareTag("Shelter") && isFollowing)
         {
@@ -48,8 +42,8 @@ public class Civilian : MonoBehaviour
     private IEnumerator DeathCountdown()
     {
         yield return new WaitForSeconds(deathTimer);
-
-        if (!isFollowing)
+        
+        if (!isFollowing) 
         {
             Destroy(gameObject);
         }
