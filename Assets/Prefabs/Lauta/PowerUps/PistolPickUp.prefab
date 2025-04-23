@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5773399876510048643}
   - component: {fileID: 5773399876510048642}
   - component: {fileID: 9130522176844929761}
+  - component: {fileID: 3144780813432723048}
   m_Layer: 0
-  m_Name: PistolPowerUp
+  m_Name: PistolPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +124,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponToGive: {fileID: 11400000, guid: 2155f504343acb4499ca4fa4df645586, type: 2}
+--- !u!95 &3144780813432723048
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773399876510048641}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 926f89e2af58b16449e38acbaf0a9814, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8485417997680348069
 PrefabInstance:
   m_ObjectHideFlags: 0
