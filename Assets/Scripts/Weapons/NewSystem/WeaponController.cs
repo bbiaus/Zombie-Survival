@@ -153,10 +153,14 @@ namespace WeaponSystem
 
             if(weapon.WeaponPrefab != null)
             {
-                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition);
+                _currentWeapon.transform.localPosition = Vector3.zero;
+                _currentWeapon.transform.localRotation = Quaternion.identity;
+
                 
 
                 _currentWeapon.SetWeaponData(_weaponData);
+
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
 
