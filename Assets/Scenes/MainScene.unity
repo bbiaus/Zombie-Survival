@@ -1251,7 +1251,7 @@ GameObject:
   - component: {fileID: 1392708914}
   m_Layer: 0
   m_Name: Shelter
-  m_TagString: Untagged
+  m_TagString: Shelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1338,16 +1338,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392708913}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09595736, y: 0.69811165, z: 0.09661834, w: 0.7029205}
-  m_LocalPosition: {x: -4.264825, y: -0.18182182, z: 4.4756207}
-  m_LocalScale: {x: 2.3436089, y: 1, z: 2.7971795}
+  m_LocalRotation: {x: 0.000000007450581, y: -0.000000029802322, z: 0.13617237, w: 0.9906852}
+  m_LocalPosition: {x: 211.76521, y: 3.6981783, z: 80.516}
+  m_LocalScale: {x: 2.343609, y: 1, z: 2.79718}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 989948168}
   - {fileID: 1168685683}
   - {fileID: 1016845790}
   - {fileID: 840923791}
-  m_Father: {fileID: 1827758219}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 15.653}
 --- !u!1 &1464563125
 GameObject:
@@ -1755,17 +1755,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5831017995559834528, guid: 9a01ab0b4610caf489826c83f0d44b8b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1392708917}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a01ab0b4610caf489826c83f0d44b8b, type: 3}
---- !u!4 &1827758219 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5831017995559834528, guid: 9a01ab0b4610caf489826c83f0d44b8b, type: 3}
-  m_PrefabInstance: {fileID: 1827758218}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2059163614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,6 +2107,7 @@ SceneRoots:
   - {fileID: 1464563128}
   - {fileID: 506146528}
   - {fileID: 1827758218}
+  - {fileID: 1392708917}
   - {fileID: 722620791}
   - {fileID: 2889514531040381266}
   - {fileID: 2142916345}
