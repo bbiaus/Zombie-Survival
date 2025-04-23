@@ -17,6 +17,7 @@ namespace Weapons.NewSystem.Data
 
 
 
+
         //[SerializeField] private GameObject _projectilePrefab;
         //[SerializeField] private GameObject _muzzleFlashPrefab;
         //[SerializeField] private GameObject _impactEffectPrefab;
@@ -31,6 +32,8 @@ namespace Weapons.NewSystem.Data
         public int MaxAmmoPerMag => _maxAmmoPerMag;
         public int MaxMags => _maxMags;
         public float ReloadTime => reloadTime;
+        
+
         //public GameObject ProjectilePrefab => _projectilePrefab;
 
     }
