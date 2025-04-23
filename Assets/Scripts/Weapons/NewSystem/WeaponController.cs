@@ -40,7 +40,7 @@ namespace WeaponSystem
         private void Update()
         {
             Debug.DrawRay(shootOrigin.position, shootOrigin.forward * 100f, Color.green);
-            if (Input.GetKeyDown(KeyCode.Mouse0) && _canShoot) // Si se presiona el botón izquierdo del mouse
+            if (Input.GetKey(KeyCode.Mouse0) && _canShoot) // Si se presiona el botón izquierdo del mouse
             {
                 Shoot(); // Llamar a la función de disparo
             }
@@ -104,7 +104,11 @@ namespace WeaponSystem
 
         public void Reload()
         {
-            if (_remainingMags <= 0 || _isReloading) return; // No hay más mags disponibles
+            //no puedo recargar si:
+            //  no tengo balas, 
+            // si estoy recargando
+            // o si el cargador ya está lleno
+            if (_remainingMags <= 0 || _isReloading || (_currentAmmo == _weaponData.MaxAmmoPerMag) ) return;
 
             _isReloading = true; // Activar el estado de recarga
             _remainingMags--; // Disminuir la cantidad de cargadores restantes
@@ -150,9 +154,12 @@ namespace WeaponSystem
             if(weapon.WeaponPrefab != null)
             {
                 _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+                
+
                 _currentWeapon.SetWeaponData(_weaponData);
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
+
 
             }
             else
