@@ -24,7 +24,6 @@ namespace WeaponSystem
       
         public void SetWeaponData(WeaponData data)
         {
-            //_firepoint = weaponData.WeaponPrefab.transform.Find("FirePoint"); // Encuentra el punto de disparo en el prefab del arma
             _weaponData = data; // Asigna los datos del arma
         }
         
@@ -33,32 +32,23 @@ namespace WeaponSystem
             Bullet bullet = BulletPool.Instance.GetBullet(); //saco una bala del pool
             if (bullet == null) return;
 
-            // Instanciamos una copia del prefab del muzzleflash en la posición del fire point
-            ParticleSystem flash = Instantiate(_muzzleFlash, _firePoint.position, _firePoint.rotation, _firePoint);
+            
 
 
                 // se le aplica una rotación aleatoria en Z para que se vea distinto
-                float random = Random.Range(0f, 360f);
+                //float random = Random.Range(0f, 360f);
                 //flash.transform.Rotate(0f, 0f, random);
 
-                bullet.Shoot(_firePoint.position, Quaternion.LookRotation(shootDirection));
+               
+                bullet.Shoot(_muzzleFlash.transform.position, Quaternion.LookRotation(shootDirection));
                 
                 
-                if (weaponAnimator != null)
-                {
-                    weaponAnimator.SetTrigger("shootTrigger"); //animacion de disparo
-                }
+                PlayShootEffects(); // Llama a la función para reproducir efectos de disparo
 
-                 // Activa el efecto de disparo
-                if (_muzzleFlash != null)
-                {
-                    flash.Play(); // Reproducir el efecto de destello
-                    // Se destruye después de un rato (ya que es una copia)
-                    Destroy(flash.gameObject, 0.3f); // Destruye el efecto después de poco tiempo
-                } 
+                
 
                 //// Activa el sonido de disparo
-                if (_weaponData.ShootSound != null && _shootSound != null) _shootSound.PlayOneShot(_weaponData.ShootSound, 0.15f);
+                
 
                 
             }
@@ -90,7 +80,28 @@ namespace WeaponSystem
             }
         }
 
-        
-        
+        private void PlayShootEffects()
+        {
+            // Instanciar una copia del prefab del muzzleflash en la posición del fire point
+            //ParticleSystem flash = Instantiate(_muzzleFlash, _firePoint.position, _firePoint.rotation,_firePoint);
+            if (_muzzleFlash != null)
+            {
+                //flash.Play(); // Reproducir el efecto de destello
+                // Se destruye después de un rato (ya que es una copia)
+                //Destroy(flash.gameObject, 0.3f); // Destruye el efecto después de poco tiempo
+                _muzzleFlash.Play(); // Reproducir el efecto de destello
+ 
+            }
+            if (_weaponData.ShootSound != null && _shootSound != null)
+            {
+                _shootSound.PlayOneShot(_weaponData.ShootSound, 0.15f);
+            }
+            if (weaponAnimator != null)
+            {
+                weaponAnimator.ResetTrigger("ShootTrigger");
+                weaponAnimator.Play("Shoot", 0, 0); // Forzar que se reinicie
+                weaponAnimator.SetTrigger("ShootTrigger");
+            } 
+        }
     }
 }

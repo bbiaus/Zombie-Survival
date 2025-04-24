@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
         currentWave++;
         waveText.text = "Wave: " + currentWave;
 
-        int numCivilians = 2 + currentWave; // Más civiles en cada oleada
-        int numZombies = 3 + (currentWave * 2); // Más zombies en cada oleada
+        int numCivilians = 1 + currentWave; // Más civiles en cada oleada
+        int numZombies = 10 + (currentWave * 3); // Más zombies en cada oleada
 
         zombiesRemaining = numZombies;
         SpawnManager.Instance.SpawnWave(numCivilians, numZombies);

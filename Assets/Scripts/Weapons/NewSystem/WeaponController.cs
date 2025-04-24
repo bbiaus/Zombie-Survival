@@ -27,7 +27,6 @@ namespace WeaponSystem
 
             if (_currentWeapon != null)
             {
-                //Invoke("EnableShooting", 2.0f); // Espera 2 segundos
                 EquipWeapon(_weaponData);   // Asignar el arma al controlador de armas
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
@@ -39,7 +38,7 @@ namespace WeaponSystem
         }
         private void Update()
         {
-            Debug.DrawRay(shootOrigin.position, shootOrigin.forward * 100f, Color.green);
+            //Debug.DrawRay(shootOrigin.position, shootOrigin.forward * 100f, Color.green);
             if (Input.GetKey(KeyCode.Mouse0) && _canShoot) // Si se presiona el botón izquierdo del mouse
             {
                 Shoot(); // Llamar a la función de disparo
@@ -60,6 +59,7 @@ namespace WeaponSystem
         {
             if (!_canShoot || _isReloading) return; // Si no se puede disparar, salir de la función
             if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+
             
             if (_currentAmmo <= 0)
             {
@@ -95,6 +95,8 @@ namespace WeaponSystem
             Vector3 shootDirection = playerController.GetPlayerDirection(_currentWeapon.FirePoint); // Obtener la dirección de disparo desde el weapon
 
             _currentWeapon.Shoot(shootDirection); // Disparar el proyectil desde el arma actual
+
+            
 
             Debug.Log($"Shooting with damage: {_weaponData.Damage}, fire rate: {_weaponData.FireRate} | Ammo: {_currentAmmo}/{_weaponData.MaxAmmoPerMag} | Mags: {_remainingMags}"); // Mensaje de depuración con información del disparo
 
@@ -153,10 +155,14 @@ namespace WeaponSystem
 
             if(weapon.WeaponPrefab != null)
             {
-                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition.position, _spawnPosition.rotation, _spawnPosition);
+                _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition);
+                _currentWeapon.transform.localPosition = Vector3.zero;
+                _currentWeapon.transform.localRotation = Quaternion.identity;
+
                 
 
                 _currentWeapon.SetWeaponData(_weaponData);
+
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
 

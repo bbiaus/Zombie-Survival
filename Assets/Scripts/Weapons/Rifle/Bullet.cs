@@ -4,7 +4,7 @@ using System.Collections;  // Necesario para IEnumerator
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float timeDestroy = 4f;
-    [SerializeField] private float bulletSpeed = 200f; // Velocidad de las balas
+    [SerializeField] private float bulletSpeed = 300f; // Velocidad de las balas
 
 
     private Rigidbody rb;
@@ -26,7 +26,8 @@ public class Bullet : MonoBehaviour
         transform.position = newPosition;
         transform.rotation = newRotation;
         isActive = true;
-        rb.linearVelocity = transform.forward * bulletSpeed; // Se aplica velocidad inmediatamente
+        //rb.linearVelocity = transform.forward * bulletSpeed; // Se aplica velocidad inmediatamente
+        rb.linearVelocity = newRotation * Vector3.forward * bulletSpeed; //probando esta linea de codigo
         StartCoroutine(ReturnBulletAfterTime());
     }
 
