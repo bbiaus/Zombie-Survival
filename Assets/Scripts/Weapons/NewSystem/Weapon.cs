@@ -13,45 +13,45 @@ namespace WeaponSystem
         [SerializeField] private AudioSource _reloadSound; // Sonido de recarga
         [SerializeField] private ParticleSystem _muzzleFlash; // Efecto de destello al disparar
         [SerializeField] private Animator weaponAnimator; // Animator del arma
-
+        private WeaponController weaponController;
         private WeaponData _weaponData;
 
-        
+
 
 
         public Transform FirePoint => _firePoint; //get de firepoint
 
-      
+
         public void SetWeaponData(WeaponData data)
         {
             _weaponData = data; // Asigna los datos del arma
         }
-        
+
         public void Shoot(Vector3 shootDirection)
         {
             Bullet bullet = BulletPool.Instance.GetBullet(); //saco una bala del pool
             if (bullet == null) return;
 
-            
 
 
-                // se le aplica una rotación aleatoria en Z para que se vea distinto
-                //float random = Random.Range(0f, 360f);
-                //flash.transform.Rotate(0f, 0f, random);
 
-               
-                bullet.Shoot(_muzzleFlash.transform.position, Quaternion.LookRotation(shootDirection));
-                
-                
-                PlayShootEffects(); // Llama a la función para reproducir efectos de disparo
+            // se le aplica una rotación aleatoria en Z para que se vea distinto
+            //float random = Random.Range(0f, 360f);
+            //flash.transform.Rotate(0f, 0f, random);
 
-                
 
-                //// Activa el sonido de disparo
-                
+            bullet.Shoot(_muzzleFlash.transform.position, Quaternion.LookRotation(shootDirection));
 
-                
-            }
+
+            PlayShootEffects(); // Llama a la función para reproducir efectos de disparo
+
+
+
+            //// Activa el sonido de disparo
+
+
+
+        }
 
         private bool _canPlayNoAmmoSound = true; // cooldown para el sonido de gatillo, (arma vacia)
 
@@ -90,7 +90,7 @@ namespace WeaponSystem
                 // Se destruye después de un rato (ya que es una copia)
                 //Destroy(flash.gameObject, 0.3f); // Destruye el efecto después de poco tiempo
                 _muzzleFlash.Play(); // Reproducir el efecto de destello
- 
+
             }
             if (_weaponData.ShootSound != null && _shootSound != null)
             {
@@ -101,7 +101,11 @@ namespace WeaponSystem
                 weaponAnimator.ResetTrigger("ShootTrigger");
                 weaponAnimator.Play("Shoot", 0, 0); // Forzar que se reinicie
                 weaponAnimator.SetTrigger("ShootTrigger");
-            } 
+            }
+        }
+        public Animator GetAnimator()
+        {
+            return weaponAnimator;
         }
     }
 }
