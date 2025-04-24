@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5516643, g: 0.7264151, b: 0.71560603, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.012
@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &54205210 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6038690221509370686, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+  m_PrefabInstance: {fileID: 514628605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378345646
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: civilianPrefab
+      value: 
+      objectReference: {fileID: 4182682895232255610, guid: b88dffbfafba9b64691cd025ff7d04f2, type: 3}
     - target: {fileID: 3625805144756783253, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: m_LocalScale.x
       value: 230
@@ -236,11 +251,11 @@ PrefabInstance:
     - target: {fileID: 8517887662725783270, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: waveText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 704351068}
     - target: {fileID: 8517887662725783270, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: civiliansSavedText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 54205210}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -303,6 +318,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+--- !u!114 &704351068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5892017448041240617, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+  m_PrefabInstance: {fileID: 514628605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &840923790
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +800,7 @@ GameObject:
   - component: {fileID: 1168685684}
   m_Layer: 0
   m_Name: ShelterTrigger
-  m_TagString: Untagged
+  m_TagString: Shelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -961,7 +987,7 @@ GameObject:
   - component: {fileID: 1392708914}
   m_Layer: 0
   m_Name: Shelter
-  m_TagString: Untagged
+  m_TagString: Shelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1086,7 +1112,7 @@ AudioSource:
   m_GameObject: {fileID: 1464563125}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_Resource: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_PlayOnAwake: 1
@@ -1183,7 +1209,7 @@ AudioSource:
   m_GameObject: {fileID: 1464563125}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_Resource: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_PlayOnAwake: 1

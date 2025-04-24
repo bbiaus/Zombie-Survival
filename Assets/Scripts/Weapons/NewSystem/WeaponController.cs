@@ -1,4 +1,6 @@
 using System.Collections;
+using JetBrains.Annotations;
+using NUnit.Framework;
 using StarterAssets;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,6 +21,7 @@ namespace WeaponSystem
         public LayerMask hitLayers;
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
+        private Animator weaponAnimator;
 
         public int currentAmmo => _currentAmmo; // Propiedad para obtener la cantidad de balas actuales
         public int remainingMags => _remainingMags; // Propiedad para obtener la cantidad de cargadores restantes
@@ -50,11 +53,20 @@ namespace WeaponSystem
             }
             if (Input.GetKeyDown(KeyCode.R)) //Tecla R para recargar
             {
-                
                 Reload();
-                
             }
+            if (weaponAnimator != null)
+            {
+                // Detecta si se está moviendo con WASD y si presiona Shift Izq para correr
+                bool isMoving = Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0;
+                float targetBlend = (Input.GetKey(KeyCode.LeftShift) && isMoving) ? 1f : 0f;
+                float currentBlend = weaponAnimator.GetFloat("runBlend");
+                float smoothBlend = Mathf.Lerp(currentBlend, targetBlend, Time.deltaTime * 8f); // cuanto más alto, más rápido
+                weaponAnimator.SetFloat("runBlend", smoothBlend);
+            }
+
         }
+
         private IEnumerator WaitForNextShot() //waitrof
         {
             yield return new WaitForSeconds(_weaponData.FireRate);  // Esperar el tiempo entre disparos
@@ -62,10 +74,10 @@ namespace WeaponSystem
         }
         public void Shoot()
         {
-            if (!_canShoot || _isReloading) return; // Si no se puede disparar, salir de la función
-            if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+            if (!_canShoot || _isReloading || weaponAnimator.GetFloat("runBlend") > 0.8f) return; // Si no se puede disparar, salir de la función
+            if (_currentWeapon == null) return; // Si no hay arma, salir de la función
 
-            
+
             if (_currentAmmo <= 0)
             {
                 Debug.Log("No ammo! Reload needed."); // Mensaje de error si no hay balas
@@ -101,7 +113,7 @@ namespace WeaponSystem
 
             _currentWeapon.Shoot(shootDirection); // Disparar el proyectil desde el arma actual
 
-            
+
 
             Debug.Log($"Shooting with damage: {_weaponData.Damage}, fire rate: {_weaponData.FireRate} | Ammo: {_currentAmmo}/{_weaponData.MaxAmmoPerMag} | Mags: {_remainingMags}"); // Mensaje de depuración con información del disparo
 
@@ -115,7 +127,7 @@ namespace WeaponSystem
             //  no tengo balas, 
             // si estoy recargando
             // o si el cargador ya está lleno
-            if (_remainingMags <= 0 || _isReloading || (_currentAmmo == _weaponData.MaxAmmoPerMag) ) return;
+            if (_remainingMags <= 0 || _isReloading || (_currentAmmo == _weaponData.MaxAmmoPerMag)) return;
 
             _isReloading = true; // Activar el estado de recarga
             _remainingMags--; // Disminuir la cantidad de cargadores restantes
@@ -125,7 +137,7 @@ namespace WeaponSystem
             _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío (temporalmente)
 
             Debug.Log("Reloaded. Ammo: " + _currentAmmo + "/" + _weaponData.MaxAmmoPerMag + " | Mags:" + _remainingMags); // Mensaje de depuración al recargar
-            
+
             StartCoroutine(FinishReloadAnimation()); // Esperar a que termine la animación
         }
 
@@ -158,13 +170,13 @@ namespace WeaponSystem
                 Debug.Log("ARMA VIEJA DESTRUIDA"); // Mensaje de depuración al destruir el arma anterior
             }
 
-            if(weapon.WeaponPrefab != null)
+            if (weapon.WeaponPrefab != null)
             {
                 _currentWeapon = Instantiate(weapon.WeaponPrefab, _spawnPosition);
                 _currentWeapon.transform.localPosition = Vector3.zero;
                 _currentWeapon.transform.localRotation = Quaternion.identity;
 
-                
+
 
                 _currentWeapon.SetWeaponData(_weaponData);
 
@@ -177,7 +189,8 @@ namespace WeaponSystem
             {
                 Debug.LogError("No hay ningun weapon asignada al WeaponController."); // Mensaje de error si no hay prefab de arma asignado
             }
-            
+
+            weaponAnimator = _currentWeapon.GetAnimator();
         }
 
     }
