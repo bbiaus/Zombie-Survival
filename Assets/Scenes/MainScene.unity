@@ -443,6 +443,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2869552317487788127, guid: 610d98769af39cf4d808c03ecd6a4d89, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
     - target: {fileID: 3108521941970786812, guid: 610d98769af39cf4d808c03ecd6a4d89, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1372,7 +1376,7 @@ AudioSource:
   m_GameObject: {fileID: 1464563125}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_Resource: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_PlayOnAwake: 1
@@ -1469,7 +1473,7 @@ AudioSource:
   m_GameObject: {fileID: 1464563125}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_Resource: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_PlayOnAwake: 1
