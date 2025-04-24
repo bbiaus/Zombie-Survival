@@ -60,6 +60,7 @@ namespace WeaponSystem
         {
             if (!_canShoot || _isReloading) return; // Si no se puede disparar, salir de la función
             if(_currentWeapon == null) return; // Si no hay arma, salir de la función
+
             
             if (_currentAmmo <= 0)
             {
@@ -95,6 +96,8 @@ namespace WeaponSystem
             Vector3 shootDirection = playerController.GetPlayerDirection(_currentWeapon.FirePoint); // Obtener la dirección de disparo desde el weapon
 
             _currentWeapon.Shoot(shootDirection); // Disparar el proyectil desde el arma actual
+
+            
 
             Debug.Log($"Shooting with damage: {_weaponData.Damage}, fire rate: {_weaponData.FireRate} | Ammo: {_currentAmmo}/{_weaponData.MaxAmmoPerMag} | Mags: {_remainingMags}"); // Mensaje de depuración con información del disparo
 

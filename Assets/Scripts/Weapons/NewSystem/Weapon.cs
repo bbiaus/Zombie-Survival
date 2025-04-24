@@ -44,10 +44,7 @@ namespace WeaponSystem
                 bullet.Shoot(_firePoint.position, Quaternion.LookRotation(shootDirection));
                 
                 
-                if (weaponAnimator != null)
-                {
-                    weaponAnimator.SetTrigger("shootTrigger"); //animacion de disparo
-                }
+                PlayShootEffects(); // Llama a la función para reproducir efectos de disparo
 
                  // Activa el efecto de disparo
                 if (_muzzleFlash != null)
@@ -90,7 +87,17 @@ namespace WeaponSystem
             }
         }
 
-        
-        
+        private void PlayShootEffects()
+        {
+            if (_muzzleFlash != null) _muzzleFlash.Play(); // Reproducir el efecto de destello
+            if (_shootSound != null && _shootSound.clip != null) _shootSound.PlayOneShot(_shootSound.clip, 0.5f); // Reproducir el sonido de disparo
+            
+            if (weaponAnimator != null)
+            {
+                weaponAnimator.ResetTrigger("ShootTrigger");
+                weaponAnimator.Play("Shoot", 0, 0); // Forzar que se reinicie
+                weaponAnimator.SetTrigger("ShootTrigger");
+            } 
+        }
     }
 }
