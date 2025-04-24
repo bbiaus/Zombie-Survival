@@ -20,6 +20,11 @@ namespace WeaponSystem
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
 
+        public int currentAmmo => _currentAmmo; // Propiedad para obtener la cantidad de balas actuales
+        public int remainingMags => _remainingMags; // Propiedad para obtener la cantidad de cargadores restantes
+
+        
+
 
         private void Start()
         {
