@@ -27,7 +27,6 @@ namespace WeaponSystem
 
             if (_currentWeapon != null)
             {
-                //Invoke("EnableShooting", 2.0f); // Espera 2 segundos
                 EquipWeapon(_weaponData);   // Asignar el arma al controlador de armas
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
@@ -39,7 +38,7 @@ namespace WeaponSystem
         }
         private void Update()
         {
-            Debug.DrawRay(shootOrigin.position, shootOrigin.forward * 100f, Color.green);
+            //Debug.DrawRay(shootOrigin.position, shootOrigin.forward * 100f, Color.green);
             if (Input.GetKey(KeyCode.Mouse0) && _canShoot) // Si se presiona el botón izquierdo del mouse
             {
                 Shoot(); // Llamar a la función de disparo

@@ -20,7 +20,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - BulletCassing
+  - Bullet
   - Ground
   - Character
   - Zombie

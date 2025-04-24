@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152249093952773408}
-  m_Layer: 3
-  m_Name: FirePoint
+  m_Layer: 0
+  m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1054610819553432155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001, y: 0.6784, z: 3.719}
+  m_LocalPosition: {x: 0, y: 0.412, z: 2.6191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170252053242113313}
   - component: {fileID: 7770019451158793932}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Audio Source (disparo)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3162884528861798165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3450530917612576674}
+  m_Layer: 0
+  m_Name: spawnPositionReal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3450530917612576674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3162884528861798165}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.412, z: 2.6191}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4579169570944516420}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3793801417625732691
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027545111387576840}
   - component: {fileID: 2876947357318722768}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Audio Source (recarga)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201256178444788183}
   - component: {fileID: 5328167797889353298}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Audio Source (gatillo)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,11 +488,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.543
+      value: -0.261
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.062
+      value: -1.9058
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -553,15 +584,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2267222047833986225, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 2267222047833986225, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.532
+      value: -0.289
       objectReference: {fileID: 0}
     - target: {fileID: 2267222047833986225, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.02
+      value: -1.936
       objectReference: {fileID: 0}
     - target: {fileID: 2267222047833986225, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -594,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 5229792078937040725, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
       propertyPath: m_Name
       value: MuzzleFlash (destello del arma)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229792078937040725, guid: f17dd21cef241734f9dcd4752329922d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -667,6 +702,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -4216859302048453862, guid: 79a26283a692586468a639f351c97607, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1152249093952773408}
+    - targetCorrespondingSourceObject: {fileID: -4216859302048453862, guid: 79a26283a692586468a639f351c97607, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3450530917612576674}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 79a26283a692586468a639f351c97607, type: 3}
       insertIndex: -1
