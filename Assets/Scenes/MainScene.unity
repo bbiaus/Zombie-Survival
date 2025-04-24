@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5516643, g: 0.7264151, b: 0.71560603, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.012
@@ -315,6 +315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: civilianPrefab
+      value: 
+      objectReference: {fileID: 4182682895232255610, guid: b88dffbfafba9b64691cd025ff7d04f2, type: 3}
     - target: {fileID: 3625805144756783253, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: m_LocalScale.x
       value: 230
@@ -1035,7 +1039,7 @@ GameObject:
   - component: {fileID: 1168685684}
   m_Layer: 0
   m_Name: ShelterTrigger
-  m_TagString: Untagged
+  m_TagString: Shelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1247,7 +1251,7 @@ GameObject:
   - component: {fileID: 1392708914}
   m_Layer: 0
   m_Name: Shelter
-  m_TagString: Untagged
+  m_TagString: Shelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
