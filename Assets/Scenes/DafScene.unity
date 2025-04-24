@@ -517,9 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba79db3c4d2a664ca6e0bf76ff776df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3191293194562004155, guid: a851be57ad5d99840a0d593f027dfebf, type: 3}
-  spawnPoints:
-  - {fileID: 1971729254}
+  civilianPrefab: {fileID: 0}
+  zombiePrefab: {fileID: 0}
+  civilianSpawnPoints: []
+  zombieSpawnPoints: []
 --- !u!4 &547103591
 Transform:
   m_ObjectHideFlags: 0
@@ -736,7 +737,7 @@ AudioSource:
   m_GameObject: {fileID: 556098605}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -999,7 +1000,7 @@ AudioSource:
   m_GameObject: {fileID: 818503641}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_Resource: {fileID: 8300000, guid: bd98e60220fd4cb4bb7971328b48a32a, type: 3}
   m_PlayOnAwake: 1
@@ -1096,7 +1097,7 @@ AudioSource:
   m_GameObject: {fileID: 818503641}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_Resource: {fileID: 8300000, guid: a2e6f53bf7166204dbf19b72040e0652, type: 3}
   m_PlayOnAwake: 1
@@ -1661,8 +1662,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6cc2a128d8f68468ecb5f92d276e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civiliansSaved: {fileID: 0}
-  totalScore: {fileID: 0}
+  civiliansSaved: 0
+  totalZombies: 0
+  civiliansSavedText: {fileID: 0}
+  waveText: {fileID: 0}
 --- !u!4 &1356957388
 Transform:
   m_ObjectHideFlags: 0
@@ -2315,9 +2318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acae53dcd55e334a81c6d3db098efa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lifee: 100
-  LifeMax: 100
-  HealthBar: {fileID: 875392251}
+  life: 100
+  lifemax: 100
+  healthbar: {fileID: 0}
+  numberlife: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

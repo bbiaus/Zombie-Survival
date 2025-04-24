@@ -546,6 +546,7 @@ MonoBehaviour:
   attackRange: 2
   damage: 1
   attackCooldown: 1.5
+  playerHealth: {fileID: 0}
 --- !u!195 &-4589789839014073773
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -604,7 +605,7 @@ AudioSource:
   m_GameObject: {fileID: 1998371697940912222}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2960421321303174007, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
