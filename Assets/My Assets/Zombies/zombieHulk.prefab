@@ -160,15 +160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 199.00383
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9524808
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 84.32731
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -204,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_Name
-      value: zombieHulk 1
+      value: zombieHulk
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e251e7d4d05e10d4da3cb1adc0e6668c, type: 3}
       propertyPath: m_Layer
@@ -294,7 +294,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 39424c6524f1cc144addf59120d7f7e6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
