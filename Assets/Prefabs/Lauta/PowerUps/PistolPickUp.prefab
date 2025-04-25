@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponToGive: {fileID: 11400000, guid: 2155f504343acb4499ca4fa4df645586, type: 2}
+  pickupSound: {fileID: 8300000, guid: 5a4aea91a7f97c24692341bdf8d75aad, type: 3}
 --- !u!95 &3144780813432723048
 Animator:
   serializedVersion: 7

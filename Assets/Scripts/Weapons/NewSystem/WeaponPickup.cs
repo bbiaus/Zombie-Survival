@@ -5,6 +5,7 @@ using Weapons.NewSystem.Data;
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private WeaponData weaponToGive;
+    [SerializeField] private AudioClip pickupSound; // Clip de sonido
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,15 @@ public class WeaponPickup : MonoBehaviour
             if (bridge != null)
             {
                 bridge.EquipWeapon(weaponToGive);
+            }
+            if (pickupSound != null)
+            {
+                GameObject temp = new GameObject("PickupSound");
+                AudioSource source = temp.AddComponent<AudioSource>();
+                source.clip = pickupSound;
+                source.volume = 1f;
+                source.Play();
+                Destroy(temp, pickupSound.length); // Lo destruye cuando termina el clip
             }
 
             Destroy(gameObject);

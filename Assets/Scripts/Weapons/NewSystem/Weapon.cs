@@ -98,14 +98,20 @@ namespace WeaponSystem
             }
             if (weaponAnimator != null)
             {
-                weaponAnimator.ResetTrigger("ShootTrigger");
+                weaponAnimator.ResetTrigger("shootTrigger");
                 weaponAnimator.Play("Shoot", 0, 0); // Forzar que se reinicie
-                weaponAnimator.SetTrigger("ShootTrigger");
+                //weaponAnimator.SetTrigger("shootTrigger");
             }
         }
         public Animator GetAnimator()
         {
             return weaponAnimator;
         }
+
+        public WeaponData GetWeaponData()
+        {
+            return _weaponData;
+        }
+
     }
 }

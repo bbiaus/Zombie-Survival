@@ -7,7 +7,7 @@ namespace Weapons.NewSystem.Data
     public class WeaponData : ScriptableObject
     {
         [SerializeField] private Weapon _weaponPrefab;
-        [SerializeField] private float _damage;
+        [SerializeField] private int _damage;
         [SerializeField] private float _fireRate;
         //[SerializeField] private float _force;
         [SerializeField] private AudioClip _shootSound;
@@ -25,7 +25,7 @@ namespace Weapons.NewSystem.Data
         //[SerializeField] private GameObject _emptyClipEffectPrefab;
 
         public Weapon WeaponPrefab => _weaponPrefab;
-        public float Damage => _damage;
+        public int Damage => _damage;
         public float FireRate => _fireRate;
         //public float Force => _force;
         public AudioClip ShootSound => _shootSound;

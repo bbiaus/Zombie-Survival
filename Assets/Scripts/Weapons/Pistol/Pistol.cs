@@ -11,7 +11,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private AudioSource gunAudioSource;
     [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private float fireRate = 0.2f;
+    //[SerializeField] private float fireRate = 0.2f;
     [SerializeField] private Camera playerCamera;  // Cámara en primera persona
     
     private float nextFireTime = 0f;
