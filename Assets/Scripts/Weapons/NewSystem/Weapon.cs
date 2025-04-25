@@ -94,7 +94,7 @@ namespace WeaponSystem
             }
             if (_weaponData.ShootSound != null && _shootSound != null)
             {
-                _shootSound.PlayOneShot(_weaponData.ShootSound, 0.15f);
+                _shootSound.PlayOneShot(_weaponData.ShootSound, 0.5f);
             }
             if (weaponAnimator != null)
             {

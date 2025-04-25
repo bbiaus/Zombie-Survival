@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieName: Tank
   type: 2
-  maxHealth: 700
+  maxHealth: 800
   damage: 40
   speed: 2
   detectionRange: 250
