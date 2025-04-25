@@ -9,11 +9,8 @@ public class ToggleSceneSelector : MonoBehaviour
 {   
     public static ToggleSceneSelector Instance;
     
-     public Button startButton;  
+    
      
-     
-
-   
     void Awake()
     {
         if(Instance == null)
@@ -26,11 +23,7 @@ public class ToggleSceneSelector : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        startButton.onClick.AddListener(StartGame);
-         
-    }
+   
     
     public void StartGame()
     {
@@ -54,8 +47,5 @@ public class ToggleSceneSelector : MonoBehaviour
         Cursor.visible = true;
         SceneManager.LoadScene("GameOver");
     }
-       
-  
-
     
 }
