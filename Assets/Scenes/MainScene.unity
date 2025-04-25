@@ -2726,8 +2726,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\nKey\t          Function\nW\t          Move forward.\nA\t          Move
-    to the left.\nS\t          Move backward.\nD\t          Move to the right.\nSpacebar\tJump.\nQ\t         
-    weapons "
+    to the left.\nS\t          Move backward.\nD\t          Move to the right.\nSpacebar\tJump.\nShift           
+    Run\nQ\t          weapons "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3624,7 +3624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e0243c32728bc419673499c33c8782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 0}
 --- !u!4 &1576465988
 Transform:
   m_ObjectHideFlags: 0
