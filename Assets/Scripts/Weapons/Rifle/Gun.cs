@@ -2,8 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem; // Nuevo sistema de entrada
 using StarterAssets;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
+//using Unity.VisualScripting;
+//using UnityEditor.Rendering;
 
 public class Gun : MonoBehaviour
 {

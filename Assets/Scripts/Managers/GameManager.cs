@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI unlockMessage;
     [SerializeField] private AudioSource unlockSound;
     [SerializeField] private float messageDuration = 3f;
-
+    [SerializeField] private AudioSource newWaveSound; // Sonido de nueva oleada
 
     
 
@@ -46,8 +46,13 @@ public class GameManager : MonoBehaviour
 
     public void StartNewWave()
     {
+        if (currentWave > 0)
+        {
+            newWaveSound.Play(); // Reproduce el sonido de nueva oleada
+        }
         currentWave++;
         waveText.text = "Wave: " + currentWave;
+
 
         int numCivilians = 1 + currentWave; // Más civiles en cada oleada
         int numZombies = 10 + (currentWave * 3); // Más zombies en cada oleada
