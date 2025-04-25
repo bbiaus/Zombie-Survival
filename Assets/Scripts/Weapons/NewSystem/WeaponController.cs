@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using NUnit.Framework;
 using StarterAssets;
@@ -22,6 +23,7 @@ namespace WeaponSystem
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
         private Animator weaponAnimator;
+        private Dictionary<WeaponData, WeaponAmmoData> _ammoDataByWeapon = new();
         [SerializeField] private AmmoHUDController ammoHUD;
         // Referencia al HUD de munición para actualizar la interfaz gráfica
 
@@ -159,10 +161,10 @@ namespace WeaponSystem
         {
             if (_currentWeapon == null) return; // Si no hay arma, salir de la función
             if (amount <= 0) return; // Si la cantidad es menor o igual a cero, no hacer nada
-            if (_remainingMags >= _weaponData.MaxMags) return; // Si ya se tiene el máximo de cargadores, no hacer nada
+            //if (_remainingMags >= _weaponData.MaxMags) return; // Si ya se tiene el máximo de cargadores, no hacer nada
 
-            // Aumentar la cantidad de cargadores restantes, asegurando que no exceda el máximo
-            _remainingMags = Mathf.Min(_remainingMags + amount, _weaponData.MaxMags);
+            // Aumentar la cantidad de cargadores restantes, si se excede del maximo no importa
+            _remainingMags = _remainingMags + amount;
 
             if (ammoHUD != null)
                     {
@@ -183,9 +185,18 @@ namespace WeaponSystem
         public void EquipWeapon(WeaponData weapon)
         {
             _weaponData = weapon;
+
+            if (_currentWeapon != null)
+            {
+                WeaponData previousWeaponData = _currentWeapon.GetWeaponData(); // Agregá este método si no existe
+                _ammoDataByWeapon[previousWeaponData] = new WeaponAmmoData(_currentAmmo, _remainingMags);
+            }
+
+
             //Limpiar cualquier arma previa, manual o instanciada
             foreach (Transform child in _spawnPosition)
             {
+                
                 Destroy(child.gameObject);
                 Debug.Log("ARMA VIEJA DESTRUIDA"); // Mensaje de depuración al destruir el arma anterior
             }
@@ -200,8 +211,17 @@ namespace WeaponSystem
 
                 _currentWeapon.SetWeaponData(_weaponData);
 
-                _currentAmmo = _weaponData.MaxAmmoPerMag;
-                _remainingMags = _weaponData.MaxMags;
+                if (_ammoDataByWeapon.TryGetValue(_weaponData, out WeaponAmmoData savedAmmo))
+                {
+                    _currentAmmo = savedAmmo.currentAmmo;
+                    _remainingMags = savedAmmo.remainingMags;
+                }
+                else
+                {
+                    _currentAmmo = _weaponData.MaxAmmoPerMag;
+                    _remainingMags = _weaponData.MaxMags;
+                }
+
 
                 if (ammoHUD != null)
                     {
@@ -216,6 +236,5 @@ namespace WeaponSystem
 
             weaponAnimator = _currentWeapon.GetAnimator();
         }
-
     }
 }
