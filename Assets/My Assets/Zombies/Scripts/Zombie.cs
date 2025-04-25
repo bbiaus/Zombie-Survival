@@ -88,9 +88,9 @@ public class Zombie : MonoBehaviour
         if (playerHealth != null && zombieData != null)
         {
             playerHealth.TakeDamage(zombieData.damage);
-            
+
             if (zombieData.attackSound != null)
-            audioSource.PlayOneShot(zombieData.attackSound);
+                audioSource.PlayOneShot(zombieData.attackSound);
         }
 
         yield return new WaitForSeconds(zombieData.attackCooldown);
@@ -113,14 +113,7 @@ public class Zombie : MonoBehaviour
         animator.SetBool("isDead", true);
         GetComponent<NavMeshAgent>().enabled = false;
         isDead = true;
-        StartCoroutine(DisableAnimatorAfterDelay());
 
-        Destroy(gameObject, 2f);
-    }
-
-    IEnumerator DisableAnimatorAfterDelay()
-    {
-        yield return new WaitForSeconds(1.15f);
-        animator.enabled = false;
+        Destroy(gameObject, 3f);
     }
 }
