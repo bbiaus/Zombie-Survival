@@ -22,6 +22,6 @@ MonoBehaviour:
   attackRange: 2
   attackCooldown: 1
   idleSound: {fileID: 0}
-  chaseSound: {fileID: 0}
-  attackSound: {fileID: 0}
+  chaseSound: {fileID: 8300000, guid: d876075166adad34f999b5f0910762ed, type: 3}
+  attackSound: {fileID: 8300000, guid: 0e5edb6bccf05984dad128fb1a9fc914, type: 3}
   randomSounds: []

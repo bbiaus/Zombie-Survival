@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: 849448bbaa76a3c409bcce2b2a044f74
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerController: {instanceID: 0}
+  - _spawnPosition: {instanceID: 0}
+  - _weaponData: {instanceID: 0}
+  - shootOrigin: {instanceID: 0}
+  - ammoHUD: {instanceID: 0}
+  - hitSound: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

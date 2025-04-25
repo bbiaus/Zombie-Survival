@@ -29,8 +29,10 @@ namespace WeaponSystem
 
         public int currentAmmo => _currentAmmo; // Propiedad para obtener la cantidad de balas actuales
         public int remainingMags => _remainingMags; // Propiedad para obtener la cantidad de cargadores restantes
+        public AudioClip hitSound;
+        public AudioSource audioSource;
 
-        
+
 
 
         private void Start()
@@ -81,7 +83,7 @@ namespace WeaponSystem
             if (weaponAnimator == null) return; // Si no hay animator, salir de la función
 
             if (!_canShoot || _isReloading || weaponAnimator.GetFloat("runBlend") > 0.8f) return; // Si no se puede disparar, salir de la función
-            
+
             if (_currentWeapon == null) return; // Si no hay arma, salir de la función
 
 
@@ -94,9 +96,9 @@ namespace WeaponSystem
 
             _currentAmmo--; // Disminuir la cantidad de balas actuales
             if (ammoHUD != null)
-                    {
-                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
-                    }
+            {
+                ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+            }
 
             Ray ray = new Ray(shootOrigin.position, shootOrigin.forward);
 
@@ -109,15 +111,17 @@ namespace WeaponSystem
                 if (hit.collider.CompareTag("Head"))
                 {
                     Debug.Log("¡Disparo en la cabeza!");
-                    hit.collider.GetComponent<ZombiePart>().TakeDamage(_weaponData.Damage * 3); // o más daño
+                    hit.collider.GetComponent<ZombiePart>().TakeDamage(_weaponData.Damage * 2); // o más daño
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
                     Debug.Log("Disparo en el cuerpo.");
                     hit.collider.GetComponent<ZombiePart>().TakeDamage(_weaponData.Damage);
                 }
-                // Acá podrías instanciar el efecto de impacto también
-
+                if (audioSource && hitSound)
+                {
+                    audioSource.PlayOneShot(hitSound);
+                }
             }
 
             Vector3 shootDirection = playerController.GetPlayerDirection(_currentWeapon.FirePoint); // Obtener la dirección de disparo desde el weapon
@@ -145,9 +149,9 @@ namespace WeaponSystem
             _currentAmmo = _weaponData.MaxAmmoPerMag; // Recargar el cargador
 
             if (ammoHUD != null)
-                    {
-                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
-                    }
+            {
+                ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+            }
 
             _currentWeapon.reloadAnim(); // Reproducir la animación de recarga del arma
             _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío (temporalmente)
@@ -167,9 +171,9 @@ namespace WeaponSystem
             _remainingMags = _remainingMags + amount;
 
             if (ammoHUD != null)
-                    {
-                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
-                    }
+            {
+                ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+            }
 
             // Mensaje de depuración con la cantidad de cargadores restantes
             Debug.Log($"Added {amount} magazines. Remaining: {_remainingMags}/{_weaponData.MaxMags}");
@@ -196,7 +200,7 @@ namespace WeaponSystem
             //Limpiar cualquier arma previa, manual o instanciada
             foreach (Transform child in _spawnPosition)
             {
-                
+
                 Destroy(child.gameObject);
                 Debug.Log("ARMA VIEJA DESTRUIDA"); // Mensaje de depuración al destruir el arma anterior
             }
@@ -224,9 +228,9 @@ namespace WeaponSystem
 
 
                 if (ammoHUD != null)
-                    {
-                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
-                    }
+                {
+                    ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+                }
 
             }
             else

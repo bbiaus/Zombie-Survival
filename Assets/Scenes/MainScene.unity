@@ -1029,6 +1029,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 378334508266577950, guid: f0da9365ed37ed24d9aa61cadcaeeb27, type: 3}
     - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: fixedAmmoSpawnPoints.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1036,6 +1040,18 @@ PrefabInstance:
       propertyPath: randomItemSpawnAreas.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1998371697940912222, guid: d58be77cba3adf54cb14b15052b86514, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3467205065587035020, guid: 7e2c5834f1515224aa67e68873891abd, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 5254651377758029891, guid: 158e282bf46c78b42837575ce3a80658, type: 3}
     - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: fixedHealthSpawnPoints.Array.size
       value: 1
@@ -1051,6 +1067,18 @@ PrefabInstance:
     - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: 'fixedHealthSpawnPoints.Array.data[0]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[0].spawnChance
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[1].spawnChance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombieTypes.Array.data[2].spawnChance
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3625805144756783253, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: m_LocalScale.x
@@ -1112,6 +1140,14 @@ PrefabInstance:
       propertyPath: ammoHUD
       value: 
       objectReference: {fileID: 1742169252}
+    - target: {fileID: 4424846951102696163, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a715ddf00ff7f24469c72404e8df85e9, type: 3}
+    - target: {fileID: 4424846951102696163, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1131821339}
     - target: {fileID: 5521979399706662299, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2561,6 +2597,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128912866}
   m_CullTransparentMesh: 1
+--- !u!82 &1131821339 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1934340113775477992, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+  m_PrefabInstance: {fileID: 514628605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1168685682
 GameObject:
   m_ObjectHideFlags: 0
