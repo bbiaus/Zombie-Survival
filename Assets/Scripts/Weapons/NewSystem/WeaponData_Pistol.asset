@@ -17,5 +17,5 @@ MonoBehaviour:
   _fireRate: 0.5
   _shootSound: {fileID: 8300000, guid: 1358017bba81cb643a991fd5442d1c4f, type: 3}
   _maxAmmoPerMag: 12
-  _maxMags: 3
+  _maxMags: 10
   reloadTime: 1

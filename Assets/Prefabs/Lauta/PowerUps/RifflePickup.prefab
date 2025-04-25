@@ -13,14 +13,14 @@ GameObject:
   - component: {fileID: 5773399876510048643}
   - component: {fileID: 5773399876510048642}
   - component: {fileID: 9130522176844929761}
-  - component: {fileID: 125506190536911060}
+  - component: {fileID: 8605667415849291468}
   m_Layer: 0
-  m_Name: RifllePickup
+  m_Name: RifflePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5773399876510048669
 Transform:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponToGive: {fileID: 11400000, guid: ba2a1e4e81c60bb48a3a6c4d66edad10, type: 2}
---- !u!95 &125506190536911060
+--- !u!95 &8605667415849291468
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0

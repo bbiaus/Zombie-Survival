@@ -107,5 +107,11 @@ namespace WeaponSystem
         {
             return weaponAnimator;
         }
+
+        public WeaponData GetWeaponData()
+        {
+            return _weaponData;
+        }
+
     }
 }

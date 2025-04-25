@@ -1,26 +1,22 @@
-using StarterAssets;
 using UnityEngine;
-using Weapons.NewSystem.Data;
 
-public class WeaponPickup : MonoBehaviour
+public class HealthPickup : MonoBehaviour
 {
-    [SerializeField] private WeaponData weaponToGive;
+    [SerializeField] private float healAmount = 100f;
     [SerializeField] private AudioClip pickupSound; // Clip de sonido
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Colisión con: {other.gameObject.name}");
+
         if (!other.CompareTag("Player")) return;
 
-        var fpc = other.GetComponent<FirstPersonController>();
-        if (fpc != null)
-        {
-            fpc.AddWeapon(weaponToGive);
+        Life playerLife = other.GetComponent<Life>();
 
-            var bridge = other.GetComponent<BridgeWeaponController>();
-            if (bridge != null)
-            {
-                bridge.EquipWeapon(weaponToGive);
-            }
+        if (playerLife != null)
+        {
+            playerLife.Heal(healAmount);
+            Debug.Log($"Jugador curado por {healAmount}. Vida actual: {playerLife.life}");
             if (pickupSound != null)
             {
                 GameObject temp = new GameObject("PickupSound");
@@ -30,12 +26,7 @@ public class WeaponPickup : MonoBehaviour
                 source.Play();
                 Destroy(temp, pickupSound.length); // Lo destruye cuando termina el clip
             }
-
             Destroy(gameObject);
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el componente FirstPersonController en el objeto: " + other.name);
         }
     }
 }
