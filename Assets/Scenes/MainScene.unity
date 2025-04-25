@@ -1255,7 +1255,7 @@ PrefabInstance:
       objectReference: {fileID: 402424021}
     - target: {fileID: 8517887662725783270, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: civiliansSaved
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8517887662725783270, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: civiliansSavedText
@@ -1412,14 +1412,14 @@ PrefabInstance:
       insertIndex: 0
       addedObject: {fileID: 402424020}
     - targetCorrespondingSourceObject: {fileID: 5381291242949723292, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1742169251}
+    - targetCorrespondingSourceObject: {fileID: 5381291242949723292, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1075901498}
     - targetCorrespondingSourceObject: {fileID: 5381291242949723292, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1765362712}
-    - targetCorrespondingSourceObject: {fileID: 5381291242949723292, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1742169251}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 667152627751006752, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       insertIndex: 1
@@ -2538,7 +2538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1075901497}
-  optionsPanelUI: {fileID: 0}
+  optionsPanelUI: {fileID: 1765362711}
 --- !u!4 &1095288070
 Transform:
   m_ObjectHideFlags: 0
@@ -3773,7 +3773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309a1bdedc61df94591f21c55429fb66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 0}
+  _audioSource: {fileID: 1464563127}
   _audioClick: {fileID: 8300000, guid: fca628173c47ab54a8d6c9ddc9620b92, type: 3}
   _audioSwitch: {fileID: 8300000, guid: 005df38c8b6edba498792a069531d11e, type: 3}
 --- !u!1 &1576465986
