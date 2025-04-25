@@ -1035,7 +1035,7 @@ RectTransform:
   m_Children:
   - {fileID: 403923601}
   - {fileID: 174098727}
-  m_Father: {fileID: 671549034529313042}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1333,7 +1333,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1590637138}
-  m_Father: {fileID: 2110038188}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2110038187}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2608,7 +2608,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2110038187}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2882,7 +2882,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2110038188}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3059,22 +3059,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a49032bda026dcf4880cc8a7e14de70a, type: 3}
---- !u!4 &1954538747 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7555334085034305603, guid: a49032bda026dcf4880cc8a7e14de70a, type: 3}
-  m_PrefabInstance: {fileID: 1954538746}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1954538748 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1961424221917293983, guid: a49032bda026dcf4880cc8a7e14de70a, type: 3}
-  m_PrefabInstance: {fileID: 1954538746}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0621cbc49026d6429584bb4caaf7149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2009082272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3549,11 @@ SceneRoots:
   - {fileID: 263156476}
   - {fileID: 708034373}
   - {fileID: 3300570786935484066}
-  - {fileID: 1913285124}
   - {fileID: 798079938}
   - {fileID: 352108695}
+  - {fileID: 191967898}
+  - {fileID: 212661359}
+  - {fileID: 909657276}
+  - {fileID: 1013154326}
+  - {fileID: 1944476701}
+  - {fileID: 1954538746}

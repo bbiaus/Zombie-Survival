@@ -22,6 +22,8 @@ namespace WeaponSystem
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
         private Animator weaponAnimator;
+        [SerializeField] private AmmoHUDController ammoHUD;
+        // Referencia al HUD de munición para actualizar la interfaz gráfica
 
         public int currentAmmo => _currentAmmo; // Propiedad para obtener la cantidad de balas actuales
         public int remainingMags => _remainingMags; // Propiedad para obtener la cantidad de cargadores restantes
@@ -74,7 +76,10 @@ namespace WeaponSystem
         }
         public void Shoot()
         {
+            if (weaponAnimator == null) return; // Si no hay animator, salir de la función
+
             if (!_canShoot || _isReloading || weaponAnimator.GetFloat("runBlend") > 0.8f) return; // Si no se puede disparar, salir de la función
+            
             if (_currentWeapon == null) return; // Si no hay arma, salir de la función
 
 
@@ -86,6 +91,10 @@ namespace WeaponSystem
             }
 
             _currentAmmo--; // Disminuir la cantidad de balas actuales
+            if (ammoHUD != null)
+                    {
+                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+                    }
 
             Ray ray = new Ray(shootOrigin.position, shootOrigin.forward);
 
@@ -133,6 +142,11 @@ namespace WeaponSystem
             _remainingMags--; // Disminuir la cantidad de cargadores restantes
             _currentAmmo = _weaponData.MaxAmmoPerMag; // Recargar el cargador
 
+            if (ammoHUD != null)
+                    {
+                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+                    }
+
             _currentWeapon.reloadAnim(); // Reproducir la animación de recarga del arma
             _currentWeapon.noAmmoSound(); // Reproducir sonido de gatillo vacío (temporalmente)
 
@@ -149,6 +163,12 @@ namespace WeaponSystem
 
             // Aumentar la cantidad de cargadores restantes, asegurando que no exceda el máximo
             _remainingMags = Mathf.Min(_remainingMags + amount, _weaponData.MaxMags);
+
+            if (ammoHUD != null)
+                    {
+                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+                    }
+
             // Mensaje de depuración con la cantidad de cargadores restantes
             Debug.Log($"Added {amount} magazines. Remaining: {_remainingMags}/{_weaponData.MaxMags}");
         }
@@ -183,6 +203,10 @@ namespace WeaponSystem
                 _currentAmmo = _weaponData.MaxAmmoPerMag;
                 _remainingMags = _weaponData.MaxMags;
 
+                if (ammoHUD != null)
+                    {
+                        ammoHUD.UpdateAmmo(_currentAmmo, _weaponData.MaxAmmoPerMag, _remainingMags);
+                    }
 
             }
             else

@@ -37,7 +37,7 @@ public class Zombie : MonoBehaviour
         if (playerLife != null)
         {
             playerHealth = playerLife.GetComponent<Life>();
-            Debug.Log("Referencia a Life del player asignada correctamente.");
+            //Debug.Log("Referencia a Life del player asignada correctamente.");
         }
     }
 
