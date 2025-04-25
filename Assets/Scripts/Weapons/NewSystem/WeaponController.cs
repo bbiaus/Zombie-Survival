@@ -15,10 +15,10 @@ namespace WeaponSystem
         [SerializeField] private Transform _spawnPosition; //equivale a transform.position
         [SerializeField] private WeaponData _weaponData;
         [SerializeField] private bool _canShoot = true; // Variable para controlar si se puede disparar o no
+        private LayerMask zombieLayer;
         private int _currentAmmo; // Balas actuales en el cargador
         private int _remainingMags; // Cargadores restantes
         private bool _isReloading = false;
-        public LayerMask hitLayers;
         public Transform shootOrigin; // El punto desde donde sale el disparo (ej: el cañón del arma)
         public float range = 100f;
         private Animator weaponAnimator;
@@ -26,7 +26,7 @@ namespace WeaponSystem
 
         private void Start()
         {
-
+            zombieLayer = 1 << LayerMask.NameToLayer("Zombie");
 
             if (_currentWeapon != null)
             {
@@ -88,17 +88,17 @@ namespace WeaponSystem
 
             Debug.DrawRay(ray.origin, ray.direction * range, Color.red, 1f);
 
-            if (Physics.Raycast(ray, out hit, range, ~0))
+            if (Physics.Raycast(ray, out hit, range, zombieLayer))
             {
                 if (hit.collider.CompareTag("Head"))
                 {
                     Debug.Log("¡Disparo en la cabeza!");
-                    hit.collider.GetComponent<ZombiePart>().TakeDamage(3); // o más daño
+                    hit.collider.GetComponent<ZombiePart>().TakeDamage(_weaponData.Damage * 3); // o más daño
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
                     Debug.Log("Disparo en el cuerpo.");
-                    hit.collider.GetComponent<ZombiePart>().TakeDamage(1);
+                    hit.collider.GetComponent<ZombiePart>().TakeDamage(_weaponData.Damage);
                 }
                 // Acá podrías instanciar el efecto de impacto también
 

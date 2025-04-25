@@ -225,6 +225,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: zombiePrefab
+      value: 
+      objectReference: {fileID: 1998371697940912222, guid: d58be77cba3adf54cb14b15052b86514, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: civilianPrefab
       value: 
       objectReference: {fileID: 4182682895232255610, guid: b88dffbfafba9b64691cd025ff7d04f2, type: 3}

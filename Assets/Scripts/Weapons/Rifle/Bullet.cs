@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
             ZombieHealth zombie = other.GetComponentInParent<ZombieHealth>();
             if (zombie != null)
             {
-                zombie.ReceiveDamage(zombie.health); // Muerte instantánea
+                zombie.ReceiveDamage(zombie.currentHealth); // Muerte instantánea
             }
         }
         else if (other.CompareTag("Body"))
