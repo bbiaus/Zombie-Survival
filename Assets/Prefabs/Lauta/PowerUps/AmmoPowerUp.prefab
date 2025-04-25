@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magsToAdd: 1
+  pickupSound: {fileID: 8300000, guid: ce1e680919ee6ca4c89549b23c3f59de, type: 3}
 --- !u!135 &3383731098440153386
 SphereCollider:
   m_ObjectHideFlags: 0
