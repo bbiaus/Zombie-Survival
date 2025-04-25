@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5773399876510048669
 Transform:
   m_ObjectHideFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponToGive: {fileID: 11400000, guid: ba2a1e4e81c60bb48a3a6c4d66edad10, type: 2}
+  pickupSound: {fileID: 0}
 --- !u!95 &8605667415849291468
 Animator:
   serializedVersion: 7

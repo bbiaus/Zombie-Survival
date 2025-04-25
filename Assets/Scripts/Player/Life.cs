@@ -8,6 +8,7 @@ public class Life : MonoBehaviour
     public float lifemax = 100;
     public Image healthbar;
     public Text numberlife;
+    public AudioSource DamageSound;
 
     void Update()
     {
@@ -22,6 +23,7 @@ public class Life : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        DamageSound.Play(); //Sonido de Daño
         life -= damage;
         Debug.Log("El jugador recibió: " + damage + " de daño y le queda: " + life + " de vida");
         life = Mathf.Clamp(life, 0, lifemax); // Asegura que no baje de 0

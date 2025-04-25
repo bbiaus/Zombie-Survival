@@ -111,7 +111,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(15f); // cada 10 segundos
+            yield return new WaitForSeconds(30f);
             SpawnRandomHealthPickup(); // Método para crear el powerup de curación
         }
     }
@@ -120,7 +120,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f); // cada 10 segundos
+            yield return new WaitForSeconds(30f); // cada 10 segundos
             SpawnRandomAmmoPickup(); // Método para crear el powerup de munición
         }
     }

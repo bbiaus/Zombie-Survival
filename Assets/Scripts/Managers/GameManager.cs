@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     public int totalZombies = 0;
     public TextMeshProUGUI civiliansSavedText;
     public TextMeshProUGUI waveText;
+    [SerializeField] private GameObject AssaultRiflePickupGO;
+    private bool riffleUnlocked = false; // Para que solo se active una vez
+    [SerializeField] private TextMeshProUGUI unlockMessage;
+    [SerializeField] private AudioSource unlockSound;
+    [SerializeField] private float messageDuration = 3f;
+
+
     
 
     private int currentWave = 0;
@@ -25,6 +32,17 @@ public class GameManager : MonoBehaviour
     {
         StartNewWave();
     }
+    private void Update()
+    {
+        if (!riffleUnlocked && civiliansSaved >= 4)
+        {
+            AssaultRiflePickupGO.SetActive(true);
+            riffleUnlocked = true;
+            Debug.Log("Rifle de asalto desbloqueado!");
+            StartCoroutine(ShowUnlockMessage("Los civiles crearon un arma nueva para obsequiarte! Andá al refugio a buscar tu recompensa."));
+        }
+    }
+
 
     public void StartNewWave()
     {
@@ -70,6 +88,17 @@ public class GameManager : MonoBehaviour
             ToggleSceneSelector.Instance.TriggerGameOver();
         }
     }
+    private IEnumerator ShowUnlockMessage(string message)
+    {
+        unlockMessage.text = message;
+        unlockMessage.gameObject.SetActive(true);
+        unlockSound.Play();
+
+        yield return new WaitForSeconds(messageDuration);
+
+        unlockMessage.gameObject.SetActive(false);
+    }
+
     /*oid Died()
     {
        ToggleSceneSelector.Instance.TriggerGameOver(); 
