@@ -1289,6 +1289,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 379.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2409509098105023445, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a78ff3a6bd791e40ac3fc7b1cad4fc1, type: 3}
+    - target: {fileID: 2409509098105023445, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409509098105023445, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.g
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409509098105023445, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2844334219718687610, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1311,15 +1327,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3148165254726326688, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -443
+      value: -440.4
       objectReference: {fileID: 0}
     - target: {fileID: 3928606826780006603, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4400610141982665600, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 520
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400610141982665600, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400610141982665600, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -689
+      value: -672.7
       objectReference: {fileID: 0}
     - target: {fileID: 4400610141982665600, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1337,6 +1361,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1131821339}
+    - target: {fileID: 4529226264994567320, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5521979399706662299, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1432,6 +1460,22 @@ PrefabInstance:
     - target: {fileID: 8833876842401045161, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178838197183507314, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ecdd46980ed33784eb5f910e032d2cbe, type: 3}
+    - target: {fileID: 9178838197183507314, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.b
+      value: 0.015556917
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178838197183507314, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178838197183507314, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+      propertyPath: m_Color.r
+      value: 0.46226418
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4227,8 +4271,8 @@ Transform:
   m_GameObject: {fileID: 1901234000}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.96628, y: -17, z: 94.90744}
-  m_LocalScale: {x: 230, y: 1, z: 230}
+  m_LocalPosition: {x: 74.96628, y: -17.5, z: 94.90744}
+  m_LocalScale: {x: 230, y: 0.1, z: 230}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 810103011}
