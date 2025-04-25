@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,60 +17,108 @@ public class AudioManager : MonoBehaviour
     private float lastVolume = 0;
 
     private float _savedVolume = 0;
-
+    
     private void Awake()
     {
         SliderSFXVolume.onValueChanged.AddListener(SetSFXVolume);
         SliderMasterVolume.onValueChanged.AddListener(SetMasterVolume);
-        SliderMusicVolume.onValueChanged.AddListener(SetMusicVolume);
         ToggleMute.onValueChanged.AddListener(SetMute);
+        LoadSettings();
+
     }
-
-    /*public void SetMute(bool isMuted)
+    void Start()
     {
-        if (isMuted)
+        LoadSettings();
+    
+    }
+    private void LoadSettings()
+    {
+        if(PlayerPrefs.HasKey("MasterVolume"))
         {
-            audioMixer.GetFloat("MasterVolume", out lastVolume);
-            Debug.LogError(lastVolume);
-            _savedVolume = lastVolume;
-            audioMixer.SetFloat("MasterVolume", -80);
+            float savedMasterVolume = PlayerPrefs.GetFloat("MasterVolume");
+           
+            SliderMasterVolume.value = savedMasterVolume; 
+            SetMasterVolume(savedMasterVolume);
         }
-        else
+         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            audioMixer.SetFloat("MasterVolume", _savedVolume);
+            float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume");
+            
+            SliderSFXVolume.value = savedSFXVolume;
+            SetSFXVolume(savedSFXVolume);
         }
-    }*/
+        
+        
+         if (PlayerPrefs.HasKey("Mute"))
+        {
+            bool isMuted = PlayerPrefs.GetInt("Mute") == 1;
+          
+            ToggleMute.isOn = isMuted;
+            SetMute(isMuted);
+        }
+    }
+        private void SaveSettings()
+    {
+        
+        PlayerPrefs.SetFloat("MasterVolume", SliderMasterVolume.value);
 
+        
+        PlayerPrefs.SetFloat("SFXVolume", SliderSFXVolume.value);
+
+        PlayerPrefs.SetInt("Mute", ToggleMute.isOn ? 1 : 0);
+
+        PlayerPrefs.Save(); 
+    }
+  
     public void SetMute(bool isMuted)
-{
+
+    {
+        float currentVolume;
+        audioMixer.GetFloat("MasterVolume", out currentVolume);
+
     if (isMuted)
     {
-        audioMixer.GetFloat("MasterVolume", out lastVolume);
-        _savedVolume = lastVolume > -80 ? lastVolume : 0; // Guarda un volumen válido
+        if (currentVolume > -80)
+        {
+        
+        _savedVolume =  currentVolume > -80 ? currentVolume : 0; // Guarda un volumen válido
         audioMixer.SetFloat("MasterVolume", -80); // Silencia
+        Debug.Log("Audio silenciado");
+        }
     }
     else
-    {
-        audioMixer.SetFloat("MasterVolume", _savedVolume); // Restaura el volumen
-        // Actualiza el slider para sincronizarlo con el volumen restaurado
-        SliderMasterVolume.value = Mathf.Pow(10, _savedVolume / 20);
+    { 
+        if (currentVolume <= -80)
+        {
+        audioMixer.SetFloat("MasterVolume", _savedVolume);
+         float sliderValue = Mathf.Pow(10, _savedVolume / 20); // Calcula el valor del slider
+        SliderMasterVolume.value = sliderValue; 
+        Debug.Log($"Restaurando volumen: {_savedVolume}, Slider ajustado: {sliderValue}");
+        
+        }
+     
     }
-}
+     SaveSettings();
+    }
+
 
     public void SetMasterVolume(float volume)
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        SaveSettings();
     }
 
     public void SetSFXVolume(float volume)
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+        SaveSettings();
     }
 
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+        SaveSettings();
     }
-
+   
 
 }

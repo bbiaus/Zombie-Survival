@@ -5,20 +5,20 @@ using UnityEngine.EventSystems;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject optionsPanelUI;
     private bool isPaused = false;
-   /* void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }*/
+   
     
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isPaused)
-            
+          if(isPaused)
+        
                 ResumeGame();
-            else
+        
+        else
+        
                 PauseGame();
             
         }
@@ -28,13 +28,14 @@ public class PauseMenuController : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
+        optionsPanelUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         AudioListener.pause = false;
-        
-     
+        PlayerPrefs.SetInt("Mute", 0);
+        PlayerPrefs.Save();
     }
     public void PauseGame()
     {
@@ -44,21 +45,18 @@ public class PauseMenuController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         AudioListener.pause = true;
-     
+        PlayerPrefs.SetInt("Mute", 1);
+        PlayerPrefs.Save();
     }
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f; 
+       
+       PlayerPrefs.SetInt("Mute", AudioListener.pause ? 1 : 0);
+       PlayerPrefs.Save();
+        
         SceneManager.LoadScene("MainMenu");
-       AudioListener.pause = false;
+      AudioListener.pause = false;
     }
-/*    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        AudioListener.pause = false;
-    
-    }
-    void OnDestroy()
-    {
-      SceneManager.sceneLoaded -= OnSceneLoaded;
-    }*/
+
 }

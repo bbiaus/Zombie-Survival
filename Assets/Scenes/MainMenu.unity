@@ -395,8 +395,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\n\nGameControls\n\nKey\t          Function\nW\t          Move forward.\nA\t         
-    Move to the left.\nS\t          Move backward.\nD\t          Move to the right.\nSpacebar\tJump.\nQ\t         
-    weapons \n"
+    Move to the left.\nS\t          Move backward.\nD\t          Move to the right.\nSpacebar\tJump.\nShift            
+    Run\nQ\t          weapons \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3364,8 +3364,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: cf24ec4897d5b9c48965325b9a3fab75, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a511997fdf463784dbccc43120850b41, type: 3}
-  m_Resource: {fileID: 8300000, guid: a511997fdf463784dbccc43120850b41, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ad9e6c07e3106bf4bb414d535c0f6817, type: 3}
+  m_Resource: {fileID: 8300000, guid: ad9e6c07e3106bf4bb414d535c0f6817, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3460,7 +3460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1164448395}
-  - component: {fileID: 1164448394}
+  - component: {fileID: 1164448396}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3468,7 +3468,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1164448394
+--- !u!4 &1164448395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164448393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 383.4293, y: 275.93106, z: 0.6638112}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1164448396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3485,21 +3500,6 @@ MonoBehaviour:
   SliderMasterVolume: {fileID: 718735424}
   SliderMusicVolume: {fileID: 0}
   ToggleMute: {fileID: 1202398491}
---- !u!4 &1164448395
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164448393}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 383.4293, y: 275.93106, z: 0.6638112}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1188659403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,7 +3737,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1164448396}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetMute
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1264606541
 GameObject:
