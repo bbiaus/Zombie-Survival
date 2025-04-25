@@ -314,6 +314,38 @@ PrefabInstance:
       propertyPath: civilianPrefab
       value: 
       objectReference: {fileID: 4182682895232255610, guid: b88dffbfafba9b64691cd025ff7d04f2, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: ammoPickupPrefab
+      value: 
+      objectReference: {fileID: 2018231576464659448, guid: c9331574e6205de468ad9260d7e81588, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: healthPickupPrefab
+      value: 
+      objectReference: {fileID: 378334508266577950, guid: f0da9365ed37ed24d9aa61cadcaeeb27, type: 3}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: fixedAmmoSpawnPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: randomItemSpawnAreas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: fixedHealthSpawnPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: 'fixedAmmoSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 603784176}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: 'randomItemSpawnAreas.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1901234002}
+    - target: {fileID: 2878307272636293836, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      propertyPath: 'fixedHealthSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1643001024}
     - target: {fileID: 3625805144756783253, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
       propertyPath: m_LocalScale.x
       value: 230
@@ -344,7 +376,10 @@ PrefabInstance:
       objectReference: {fileID: 54205210}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1223800326882731329, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1901234001}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
 --- !u!1001 &514628605
@@ -411,6 +446,37 @@ PrefabInstance:
       addedObject: {fileID: 416712252}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
+--- !u!1 &603784175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 603784176}
+  m_Layer: 0
+  m_Name: spawnPointAmmo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &603784176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603784175}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.0700073, y: 5.11, z: -9.43}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1313686418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &704351068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5892017448041240617, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
@@ -422,6 +488,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &810103011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1223800326882731329, guid: 73f55d81ead790d4d83ab72f7bd299c2, type: 3}
+  m_PrefabInstance: {fileID: 506146528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &810597860 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5381291242949723292, guid: 022ea4d0c4e20b14da78b2cc98fd8385, type: 3}
@@ -852,7 +923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5773399876510048641, guid: d11d9a049da5cc24c8c2091964ae5bb0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773399876510048669, guid: d11d9a049da5cc24c8c2091964ae5bb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1063,6 +1134,8 @@ Transform:
   - {fileID: 1543695741}
   - {fileID: 1134264739}
   - {fileID: 220538587}
+  - {fileID: 1643001024}
+  - {fileID: 603784176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392708913
@@ -1414,6 +1487,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5773399876510048669, guid: 8f0a5b37d8055b4458f54e6bee0d8294, type: 3}
   m_PrefabInstance: {fileID: 1053868650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1643001023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643001024}
+  m_Layer: 0
+  m_Name: spawnPointHealth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1643001024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643001023}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.597, y: 5.05, z: -24.591003}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1313686418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1679608073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1708,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5831017995559834528, guid: 9a01ab0b4610caf489826c83f0d44b8b, type: 3}
   m_PrefabInstance: {fileID: 1827758218}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1901234000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1901234001}
+  - component: {fileID: 1901234002}
+  m_Layer: 0
+  m_Name: SpawnZonePickups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1901234001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901234000}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 74.96628, y: -17, z: 94.90744}
+  m_LocalScale: {x: 230, y: 1, z: 230}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 810103011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1901234002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901234000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1916142005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,6 +2044,10 @@ PrefabInstance:
     - target: {fileID: 378334508266577950, guid: f0da9365ed37ed24d9aa61cadcaeeb27, type: 3}
       propertyPath: m_Name
       value: HealthPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 378334508266577950, guid: f0da9365ed37ed24d9aa61cadcaeeb27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1012128592000203428, guid: f0da9365ed37ed24d9aa61cadcaeeb27, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2285,6 +2446,10 @@ PrefabInstance:
     - target: {fileID: 2018231576464659448, guid: c9331574e6205de468ad9260d7e81588, type: 3}
       propertyPath: m_Name
       value: AmmoPowerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018231576464659448, guid: c9331574e6205de468ad9260d7e81588, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6593096576398516818, guid: c9331574e6205de468ad9260d7e81588, type: 3}
       propertyPath: m_LocalPosition.x
