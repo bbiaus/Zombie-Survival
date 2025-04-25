@@ -38,9 +38,13 @@ public class Life : MonoBehaviour
         life = Mathf.Clamp(life, 0, lifemax); // Asegura que no pase el máximo
     }
 
-    void Die()
-    {
-        Debug.Log("El jugador murió");
-        // Acá podrías desactivar movimiento, mostrar pantalla de derrota, etc.
+     void Die()
+    {   
+        
+         Debug.Log("El jugador murió");
+           if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Died();
+        }
     }
 }

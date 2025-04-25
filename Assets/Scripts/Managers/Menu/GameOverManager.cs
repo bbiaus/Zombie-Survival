@@ -14,13 +14,19 @@ public class GameOverManager : MonoBehaviour
     }
     public void ReplayGame()
     {
-        string replayScene = PlayerPrefs.GetString("SelectedScene", "");
+       /* string replayScene = PlayerPrefs.GetString("SelectedScene", "");
         if(!string.IsNullOrEmpty(replayScene))
         {
             Time.timeScale = 1; 
             SceneManager.LoadScene(replayScene);
 
-        }
+        }*/
+        
+    
+        string selectedScene = "MainScene";
+        SceneManager.LoadScene(selectedScene);
+         Cursor.lockState = CursorLockMode.Locked; 
+         Cursor.visible = false;
 
     }
 

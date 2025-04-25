@@ -60,12 +60,22 @@ public class GameManager : MonoBehaviour
         StartNewWave();
     }
 
-    /*public void PlayerDied()
+       public void Died()
+    {
+        Debug.Log("El jugador murió. Activando Game Over.");
+
+        // Llamar a TriggerGameOver de ToggleSceneSelector
+        if (ToggleSceneSelector.Instance != null)
+        {
+            ToggleSceneSelector.Instance.TriggerGameOver();
+        }
+    }
+    /*oid Died()
     {
        ToggleSceneSelector.Instance.TriggerGameOver(); 
         
     }*/
-       void Update()
+     /*oid Update()
     {
         // Prueba para activar el Game Over con la tecla "j"
         if (Input.GetKeyDown(KeyCode.J))
@@ -73,5 +83,5 @@ public class GameManager : MonoBehaviour
             Debug.Log("se presiono la tecla j");
             ToggleSceneSelector.Instance.TriggerGameOver();
         }
-    }
+    }*/
 }
