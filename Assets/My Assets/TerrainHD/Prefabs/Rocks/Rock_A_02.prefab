@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8877216319164120280}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rock_A_03_Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,20 +44,40 @@ PrefabInstance:
       value: Rock_A_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 127
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 0347a2ca593e212468d38a00c0f15925, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -242,7 +262,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.32, z: 0.29}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
